@@ -67,10 +67,10 @@
                                                     <td>{{$restaurant->address}}</td>
                                                     <td>{{$restaurant->menu_id}}</td>
                                                     <td>
-                                                        <a class="btn menu-edit-btn">
+                                                        <a class="btn res-edit-btn" data-id="{{$restaurant->id}}" data-name="{{$restaurant->name}}" data-address="{{$restaurant->address}}" data-menu_id="{{$restaurant->menu_id}}">
                                                             <i data-feather='edit'></i>
                                                         </a>
-                                                        <a class="menu-remove-btn btn" data-id="{{$restaurant->id}}">
+                                                        <a class="res-remove-btn btn" data-id="{{$restaurant->id}}">
                                                             <i data-feather='delete'></i>
                                                         </a>
                                                         <a  target="blank" class="menu-view-btn btn" data-id="{{$restaurant->id}}">
@@ -129,6 +129,45 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade text-left" id="modal-res-update" tabindex="-1" role="dialog" aria-labelledby="update-res" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="update-res">Restaurant</h4>
+                        <button type="button" class="close content-modal-close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="#" class="form-res-update">
+                        <div class="modal-body">
+                            <label>Name: </label>
+                            <div class="form-group">
+                                <input type="text" placeholder="name" class="form-control" id="res-name"/>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <label>Address: </label>
+                            <div class="form-group">
+                                <input type="text" placeholder="address" class="form-control" id="res-addr"/>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <label>Menu Name: </label>
+                            <div class="form-group">
+                                <select class="menu_name form-control" id="menu_id">
+                                    @foreach ($pages as $page)
+                                        <option value="{{$page->id}}">{{$page->pagename}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- END: Content-->
 
@@ -145,28 +184,9 @@
         $('.btn-add-res').on('click', function(e){
             $('#modal-res-create').modal('show');
         });
-        $(document).on('submit', '.form-res-create', function(e){
-            var url = "{{route('restaurant.create')}}";
-            var address = $('#res-addr').val();
-            var name = $('#res-name').val();
-            var menu_id = $('#menu_id').val();
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'post',
-                data: {address : address, name : name, menu_id : menu_id},
-                url: url,
-                success: function(data) {
-                    if(data['success']){
-                        toastr["success"]("Removed Successfully.");
-                    }
-                    else{
-                        toastr["error"]("Error");
-                    }
-                }
-            });
-            
+
+        $(document).on('click', '.res-edit-btn', function(e){
+        
         });
     </script>
 </body>

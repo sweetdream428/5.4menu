@@ -22,21 +22,27 @@ class RestaurantController extends Controller
     public function create(Request $request)
     {
         try{
-            $page = new Page;
-            $page->category_id = $request->category_id;
-            $page->title = $request->title ? $request->title : '';
-            $page->description = $request->description ? $request->description : '';
-            $page->number = $request->number ? $request->number : '';
-            $page->save();
+            $restaurant = new Restaurant;
+            $restaurant->name = $request->name;
+            $restaurant->address = $request->address;
+            $restaurant->menu_id = $request->menu_id;
+            $restaurant->save();
             
-            $id = $page->id;
+            $id = $restaurant->id;
             return response()->json(['success'=>$id]);
         }
         catch(Exception $e){
             return response()->json(['success'=>false]);
         }
-        $restaurants = Restaurant::get();
-        $pages = Page::get();
-        return view('restaurants.index')->with('restaurants', $restaurants)->with('pages', $pages);
-    }  
+    }
+    
+    public function remove($id){
+        try{
+            Restaurant::where('id', $id)->delete();
+            return response()->json(['success'=>true]);
+        }
+        catch(Exception $e){
+            return response()->json(['success'=>false]);
+        }
+    }
 }

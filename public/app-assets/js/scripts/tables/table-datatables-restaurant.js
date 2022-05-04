@@ -10,12 +10,12 @@
    var dt_basic_table = $('.datatables-basic');    
  
    if (dt_basic_table.length) {
-     dt_basic_table.DataTable({
+    var dt_basic = dt_basic_table.DataTable({
          columns: [
              // columns according to JSON
-             { data: 'pagename' },
-             { data: 'date' },
-             { data: 'theme_name' },
+             { data: 'name' },
+             { data: 'address' },
+             { data: 'menu_id' },
              { data: 'action' }
          ],
          columnDefs: [{
@@ -47,7 +47,7 @@
                  display: $.fn.dataTable.Responsive.display.modal({
                      header: function(row) {
                          var data = row.data();
-                         return 'Details of ' + data['pagename'];
+                         return 'Details of ' + data['name'];
                      }
                  }),
                  type: 'column',
@@ -68,16 +68,16 @@
                  next: '&nbsp;'
              }
          }
-     });
+    });
    }
    $(document).on('click', '.sorting_1', function(e){
      feather.replace();
    });  
  
-   $(document).on('click', '.menu-remove-btn', function(e){
+   $(document).on('click', '.res-remove-btn', function(e){
      e.preventDefault();
      var id = $(this).data('id');
-     var url = '/menupage-remove/' + id;
+     var url = '/res-remove/' + id;
      dt_basic_table.DataTable().row($(this).parents('tr')).remove().draw();
        $.ajax({
          headers: {
@@ -95,7 +95,39 @@
          }
      });
      
-   })
+   });
+
+   $(document).on('submit', '.form-res-create', function(e){
+    var url = "/res-create";
+    var address = $('#res-addr').val();
+    var name = $('#res-name').val();
+    var menu_id = $('#menu_id').val();
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'post',
+        data: {address : address, name : name, menu_id : menu_id},
+        url: url,
+        success: function(data) {
+            if(data['success']){
+                toastr["success"]("Saved Successfully.");
+                dt_basic.row
+                    .add({
+                    name: name,
+                    address: address,
+                    menu_id: menu_id,
+                    action: null
+                    })
+                    .draw();
+                // location.reload();
+            }
+            else{
+                toastr["error"]("Error");
+            }
+        }
+    });
+});
  
  });
  

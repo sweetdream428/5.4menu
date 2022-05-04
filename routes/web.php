@@ -53,6 +53,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('restaurant', [RestaurantController::class, 'index'])->name('restaurant.index');
     Route::post('res-create', [RestaurantController::class, 'create'])->name('restaurant.create');
+    Route::post('res-remove/{id}', [RestaurantController::class, 'remove'])->name('restaurant.remove');
+    
 
 });
 
