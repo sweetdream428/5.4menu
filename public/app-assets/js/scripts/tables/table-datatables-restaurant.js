@@ -41,11 +41,6 @@
              '<"col-sm-12 col-md-6"p>' +
              '>',
          // Buttons with Dropdown
-         buttons: [{
-             init: function(api, node, config) {
-                 $(node).removeClass('btn-secondary');
-             }
-         }],
          // For responsive popup
          responsive: {
              details: {

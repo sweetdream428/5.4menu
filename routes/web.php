@@ -52,6 +52,7 @@ Route::middleware('auth')->group(function () {
     Route::post('content-remove', [MenupageController::class, 'contentremove'])->name('content.remove');
 
     Route::get('restaurant', [RestaurantController::class, 'index'])->name('restaurant.index');
+    Route::post('res-create', [RestaurantController::class, 'create'])->name('restaurant.create');
 
 });
 
