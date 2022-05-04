@@ -4,10 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Restaurant;
 use Exception;
 
 
@@ -16,7 +13,8 @@ class RestaurantController extends Controller
 
     public function index()
     {
-        return view('restaurants.index');
+        $restaurants = Restaurant::get();
+        return view('restaurants.index')->with('restaurants', $restaurants);
     }  
     
 }

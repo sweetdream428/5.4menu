@@ -51,7 +51,24 @@
                                 <div class="card-datatable">
                                     
                                     <table class="datatables-basic table">
-                                       
+                                       <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Address</th>
+                                                <th>Menu Name</th>
+                                                <th>Action</th>
+                                            </tr>
+                                       </thead>
+                                       <tbody>
+                                            @foreach ($restaurants as $restaurant)
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            @endforeach
+                                       </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -68,8 +85,8 @@
     <div class="drag-target"></div>
 
     @include('layouts.footer')
-    <!-- BEGIN: Page JS-->
-   
+    <!-- BEGIN: Page JS-->   
+    <script src="{{ asset('/app-assets/js/scripts/tables/table-datatables-restaurant.js') }}"></script>
     <!-- END: Page JS-->
     <script>
         '@if (session()->has('message'))<div class="alert alert-success">' + toastr["success"]("{{ session()->get('message') }}") + '</div> @endif'
