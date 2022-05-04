@@ -67,12 +67,7 @@
         line-height: 1.2;
         color: grey;
     }
-    .navbar-floating .header-navbar-shadow {
-        height: 70px;
-        background: #ffffff;
-        -webkit-box-shadow: 0 -3px 31px 0 rgb(0 0 0 / 5%), 0 6px 20px 0 rgb(0 0 0 / 2%);
-        box-shadow: 0 -3px 31px 0 rgb(0 0 0 / 5%), 0 6px 20px 0 rgb(0 0 0 / 2%);
-    }
+    
 </style>
 
 <body class="vertical-layout vertical-menu-modern  navbar-floating footer-static  " data-open="click"
@@ -81,7 +76,6 @@
         <!-- BEGIN: Content-->
         <div class="app-content content m-0">
             <div class="content-overlay"></div>
-            <div class="header-navbar-shadow"></div>
             <div class="content-wrapper">
                 <!-- Centered Aligned Tabs starts -->
                 @foreach ($categories as $category)                                 
