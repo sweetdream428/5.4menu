@@ -26,6 +26,7 @@ Route::post('custom-login', [LoginController::class, 'customLogin'])->name('logi
 Route::post('custom-registration', [LoginController::class, 'customRegistration'])->name('register.custom'); 
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('page/{pagename}/{id}', [MenupageController::class, 'pageview']);
+Route::post('cate-get', [MenupageController::class, 'categet'])->name('category.get');
 
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {
@@ -54,8 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::get('restaurant', [RestaurantController::class, 'index'])->name('restaurant.index');
     Route::post('res-create', [RestaurantController::class, 'create'])->name('restaurant.create');
     Route::post('res-remove/{id}', [RestaurantController::class, 'remove'])->name('restaurant.remove');
-    
-    Route::post('cate-get', [MenupageController::class, 'categet'])->name('category.get');
+
 });
 
 //clear cache
