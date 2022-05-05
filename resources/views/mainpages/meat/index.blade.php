@@ -122,38 +122,48 @@
             <div class="content-overlay"></div>
             <div class="content-wrapper">
                 <!-- Centered Aligned Tabs starts -->
-                @foreach ($categories as $category)                                 
+                                              
                     <div class="page-view pt-3">
-                        @if ($loop->index == 0) 
+                        {{-- @if ($loop->index == 0) 
                             <div>
                                 <img src={{asset("/assets/images/Template/complex/temp-logo.png")}} alt="template logo" style="display: block;margin:auto;" />
                             </div>
-                        @endif
+                        @endif --}}
                         <div class="mt-2" style="width: 100%;text-align: center;">
-                            <div style="display: inline-block;margin:0 auto;">
+                            <div style="margin:0 auto;" class="d-flex justify-content-center">
                                 <span><img src={{asset("/assets/images/Template/complex/left-shape.png")}} alt="left" /></span>
-                                <span class="text-uppercase" style="font-weight:500;font-size: 18px;color:gray;">{{$category->name}}</span>
+                                <span class="text-uppercase" style="font-weight:500;font-size: 18px;color:gray;">
+                                    <select class="form-control" id="cate_id" style="background-color: #F6F5E6;">
+                                        @foreach ($categories as $category)
+                                            <option value="{{$category->id}}">{{$category->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </span>
                                 <span><img src={{asset("/assets/images/Template/complex/right-shape.png")}} alt="right" /></span>
                             </div>
                         </div>
-                        <table class="table mt-2">
-                            <tbody class="content-tpage">
-                                @foreach ($category->contents as $content)
-                                    <tr>
-                                        <td>
-                                            <h4 id="content-title-{{$content->id}}">{{$content->title}}</h4>
-                                            <p id="content-desc-{{$content->id}}">{{$content->description}}</p>
-                                        </td>
-                                        <td style="text-align: right;" id="content-num-{{$content->id}}">
-                                            {{$content->number}}
-                                        </td>
-                                    </tr>
-                            
-                                @endforeach
-                            </tbody>
-                        </table>
+                        @foreach ($categories as $category)
+                            @if ($category->id == 9)
+                                <table class="table mt-2">
+                                    <tbody class="content-tpage">
+                                        @foreach ($category->contents as $content)
+                                            <tr>
+                                                <td>
+                                                    <h4 id="content-title-{{$content->id}}">{{$content->title}}</h4>
+                                                    <p id="content-desc-{{$content->id}}">{{$content->description}}</p>
+                                                </td>
+                                                <td style="text-align: right;" id="content-num-{{$content->id}}">
+                                                    {{$content->number}}
+                                                </td>
+                                            </tr>
+                                    
+                                        @endforeach
+                                    </tbody>
+                                </table> 
+                            @endif
+                        @endforeach
                     </div>
-                @endforeach
+                
                 <!-- Centered Aligned Tabs ends -->
             </div>
         </div>
@@ -164,5 +174,12 @@
     <div class="drag-target"></div>
 
     @include('layouts.footer')
-    
+    <script>
+        $('#cate_id').on('change', function(e){
+            var cate_val = $(this).val();
+            console.log('cate_val', cate_val);
+
+            var data = "@foreach ($categories as $category)@if($category->id == "+cate_val+")<table class='table mt-2'><tbody class='content-tpage'>@foreach ($category->contents as $content)<tr><td><h4 id='content-title-{{$content->id}}'>{{$content->title}}</h4><p id='content-desc-{{$content->id}}'>{{$content->description}}</p></td><td style='text-align: right;' id='content-num-{{$content->id}}'>{{$content->number}}</td></tr>@endforeach</tbody></table>@endif@endforeach";
+        });
+    </script>
 </body>

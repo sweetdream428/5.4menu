@@ -8,6 +8,7 @@ use App\Models\Page;
 use App\Models\Category;
 use App\Models\Content;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
@@ -16,13 +17,14 @@ class MenupageController extends Controller
 
     public function index()
     {
-        $pages = Page::get();
+        $pages = Page::where('owner', Auth::user()->id)->get();
         return view('menupage.index')->with('pages', $pages);
     }
     public function getpageid($pagename){
         try{
             $page = new Page;
             $page->name = $pagename;
+            $page->owner = Auth::user()->id;
             $page->save();
             $id = $page->id;
             return response()->json(['success'=>$id]);

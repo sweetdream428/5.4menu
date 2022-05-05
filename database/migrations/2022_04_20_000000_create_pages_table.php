@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('pagename')->nullable();
             $table->string('name');
+            $table->string('owner');
             $table->timestamps();
         });
     }

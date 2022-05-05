@@ -99,8 +99,12 @@
                                                 <a class="nav-link {{$category->id == $firstid ? 'active' : ''}}" id="tab-category-{{$category->id}}" data-toggle="tab" href="#category-{{$category->id}}" aria-controls="category-{{$category->id}}" role="tab" aria-selected="true">
                                                     {{$category->name}}
                                                 </a>
-                                                <i data-feather='edit-2' class="edit-icon-position" data-id="{{$category->id}}" data-name="{{$category->name}}"></i>
-                                                <i data-feather='x' class="remove-icon-position" data-id="{{$category->id}}"></i>
+                                                <i class="edit-icon-position" data-id="{{$category->id}}" data-name="{{$category->name}}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                                                </i>
+                                                <i class="remove-icon-position" data-id="{{$category->id}}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                                </i>
                                             </li>
                                         @endforeach
                                         
@@ -123,8 +127,12 @@
                                                                 </td>
                                                                 <td id="content-num-{{$content->id}}">{{$content->number}}</td>
                                                                 <td>
-                                                                    <i data-feather='edit-2' class="edit-content-position" id="edit-content-position{{$content->id}}" data-id="{{$content->id}}" data-title="{{$content->title}}" data-description="{{$content->description}}" data-number="{{$content->number}}"></i>
-                                                                    <i data-feather='x' class="remove-content-position ml-1" data-id="{{$content->id}}"></i>
+                                                                    <i class="edit-content-position" id="edit-content-position{{$content->id}}" data-id="{{$content->id}}" data-title="{{$content->title}}" data-description="{{$content->description}}" data-number="{{$content->number}}">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                                                                    </i>
+                                                                    <i class="remove-content-position ml-1" data-id="{{$content->id}}">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                                                    </i>
                                                                 </td>
                                                             </tr>
                                                         @endforeach
@@ -293,7 +301,7 @@
                         $('#modal-cate-create').modal('hide');
                         $('.category-text').val('');
                         var id = data['success'];
-                        $('.nav-tabs').append("<li class='nav-item'><a class='nav-link' id='tab-category-"+id+"' data-toggle='tab' href='#category-"+id+"' aria-controls='category-"+id+"' role='tab' aria-selected='false'>"+category_text+"</a><i data-feather='edit-2' class='edit-icon-position' data-id="+id+" data-name="+category_text+"></i><i data-feather='x' class='remove-icon-position' data-id="+id+"></i></li>");
+                        $('.nav-tabs').append("<li class='nav-item'><a class='nav-link' id='tab-category-"+id+"' data-toggle='tab' href='#category-"+id+"' aria-controls='category-"+id+"' role='tab' aria-selected='false'>"+category_text+"</a><i class='edit-icon-position' data-id="+id+" data-name="+category_text+"><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-edit-2'><path d='M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z'></path></svg></i><i class='remove-icon-position' data-id="+id+"><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-x'><line x1='18' y1='6' x2='6' y2='18'></line><line x1='6' y1='6' x2='18' y2='18'></line></svg></i></li>");
                         
                         $('.tab-content').append("<div class='tab-pane' id='category-"+id+"' aria-labelledby='tab-category-"+id+"' role='tabpanel'><p><h2 id='content-all-title"+id+"'>"+category_text+"</h2><button type='button' class='btn btn-primary btn-add-content' data-toggle='modal' data-category_id="+id+">Add</button></p><table class='table'><tbody></tbody></table></div>");
                         feather.replace();
@@ -394,7 +402,7 @@
                     if(data['success']){
                         var id = data['success'];
 
-                        $("#category-"+category_id+" .table").append("<tbody class='content-tpage"+category_id+"'><tr><td><h4 id='content-title-"+id+"'>"+title+"</h4><p id='content-desc-"+id+"'>"+description+"</p></td><td id='content-num-"+id+"'>"+number+"</td><td><i data-feather='edit-2' class='edit-content-position' id='edit-content-position"+id+"' data-id='"+id+"' data-title='"+title+"' data-description='"+description+"' data-number='"+number+"'></i><i data-feather='x' class='remove-content-position ml-1' data-id='"+id+"'></i></td></tr></tbody>");
+                        $("#category-"+category_id+" .table").append("<tbody class='content-tpage"+category_id+"'><tr><td><h4 id='content-title-"+id+"'>"+title+"</h4><p id='content-desc-"+id+"'>"+description+"</p></td><td id='content-num-"+id+"'>"+number+"</td><td><i class='edit-content-position' id='edit-content-position"+id+"' data-id='"+id+"' data-title='"+title+"' data-description='"+description+"' data-number='"+number+"'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-edit-2'><path d='M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z'></path></svg></i><i class='remove-content-position ml-1' data-id='"+id+"'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-x'><line x1='18' y1='6' x2='6' y2='18'></line><line x1='6' y1='6' x2='18' y2='18'></line></svg></i></td></tr></tbody>");
                         feather.replace();
                         $('#cate_con_id').val('');
                         $('#con-title').val('');
