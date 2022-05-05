@@ -111,16 +111,23 @@
         url: url,
         success: function(data) {
             if(data['success']){
+                var res_id = data['success'];
+                var res_name = data['name'];
+                var res_addr = data['address'];
+                var res_menu_id= data['menu_id'];
+
                 toastr["success"]("Saved Successfully.");
+                var edit_td = "<a class='btn res-edit-btn' data-id='"+res_id+"' data-name='"+res_name+"' data-address='"+res_addr+"' data-menu_id='"+res_menu_id+"'><i data-feather='edit'></i></a><a class='res-remove-btn btn' data-id='"+res_id+"'><i data-feather='delete'></i></a><a  target='blank' class='menu-view-btn btn' data-id='"+res_id+"'><i data-feather='eye'></i></a>";
                 dt_basic.row
                     .add({
                     name: name,
                     address: address,
                     menu_id: menu_id,
-                    action: null
+                    action: edit_td
                     })
                     .draw();
-                // location.reload();
+                feather.replace();
+                $('#modal-res-create').modal('hide');
             }
             else{
                 toastr["error"]("Error");

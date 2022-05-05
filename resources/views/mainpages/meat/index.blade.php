@@ -23,7 +23,7 @@
         border-top: none;
     }
     .templatecontainer, .templatecontainer-sm, .templatecontainer-md, .templatecontainer-lg, .templatecontainer-xl, .templatecontainer-xxl {
-        width: 100%;
+        width: calc(100% - );
         padding-right: 1rem;
         padding-left: 1rem;
         margin-right: auto;
@@ -31,26 +31,6 @@
     }
     .templatecontainer, .templatecontainer-sm, .templatecontainer-md, .templatecontainer-lg, .templatecontainer-xl {
         max-width: 1100px;
-    }
-    @media only screen and (max-width: 1200px) {
-        .templatecontainer, .templatecontainer-sm, .templatecontainer-md, .templatecontainer-lg, .templatecontainer-xl {
-            max-width: 900px;
-        }
-    }
-    @media (min-width: 768px) and (max-width: 992px) {
-        .templatecontainer, .templatecontainer-sm, .templatecontainer-md, .templatecontainer-lg {
-            max-width: 860px;
-        }
-    }
-    @media (min-width: 576px) (max-width: 768px) {
-        .templatecontainer, .templatecontainer-sm, .templatecontainer-md, .templatecontainer-lg {
-            max-width: 720px;
-        }
-    }
-    @media (max-width: 576px) {
-        .templatecontainer, .templatecontainer-sm, .templatecontainer-md, .templatecontainer-lg {
-            max-width: 540px;
-        }
     }
     .table {
         width: 60%;
@@ -67,6 +47,70 @@
         line-height: 1.2;
         color: grey;
     }
+    @media only screen and (max-width: 1200px) {
+        .templatecontainer, .templatecontainer-sm, .templatecontainer-md, .templatecontainer-lg, .templatecontainer-xl {
+            max-width: 900px;
+        }
+        td h4{
+            font-size: 14px;
+        }
+        td p, td{
+            font-size: 12px;
+        }
+    }
+    @media (min-width: 768px) and (max-width: 992px) {
+        .templatecontainer, .templatecontainer-sm, .templatecontainer-md, .templatecontainer-lg {
+            max-width: 860px;
+        }
+
+    }
+    @media (min-width: 576px) (max-width: 768px) {
+        .templatecontainer, .templatecontainer-sm, .templatecontainer-md, .templatecontainer-lg {
+            max-width: 720px;
+        }
+        td h4{
+            font-size: 12px;
+        }
+        td p, td{
+            font-size: 10px;
+        }
+        table.table {
+            width: 100% !important;
+        }
+    }
+    @media (max-width: 576px) {
+        html body .app-content{
+            padding: 0px !important;
+        }
+        .templatecontainer, .templatecontainer-sm, .templatecontainer-md, .templatecontainer-lg {
+            max-width: 540px;
+        }
+        td h4{
+            font-size: 12px;
+        }
+        td p, td{
+            font-size: 10px;
+        }
+        .table {
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+    @media (max-width: 576px) {
+        td h4{
+            font-size: 12px;
+        }
+        td p, td{
+            font-size: 10px;
+        }
+        .table {
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+   
     
 </style>
 
@@ -95,12 +139,12 @@
                         <table class="table mt-2">
                             <tbody class="content-tpage">
                                 @foreach ($category->contents as $content)
-                                    <tr colspan="12">
-                                        <td colspan="8">
+                                    <tr>
+                                        <td>
                                             <h4 id="content-title-{{$content->id}}">{{$content->title}}</h4>
-                                            <p id="content-desc-{{$content->id}}" style="font-size: 12px;">{{$content->description}}</p>
+                                            <p id="content-desc-{{$content->id}}">{{$content->description}}</p>
                                         </td>
-                                        <td colspan="4" style="text-align: right;" id="content-num-{{$content->id}}">
+                                        <td style="text-align: right;" id="content-num-{{$content->id}}">
                                             {{$content->number}}
                                         </td>
                                     </tr>

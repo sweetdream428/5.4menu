@@ -29,7 +29,7 @@ class RestaurantController extends Controller
             $restaurant->save();
             
             $id = $restaurant->id;
-            return response()->json(['success'=>$id]);
+            return response()->json(['success'=>$id, 'name'=>$request->name, 'address'=>$request->address, 'menu_id'=>$request->menu_id]);
         }
         catch(Exception $e){
             return response()->json(['success'=>false]);

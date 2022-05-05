@@ -32,26 +32,6 @@
     .templatecontainer, .templatecontainer-sm, .templatecontainer-md, .templatecontainer-lg, .templatecontainer-xl {
         max-width: 1100px;
     }
-    @media only screen and (max-width: 1200px) {
-        .templatecontainer, .templatecontainer-sm, .templatecontainer-md, .templatecontainer-lg, .templatecontainer-xl {
-            max-width: 900px;
-        }
-    }
-    @media (min-width: 768px) and (max-width: 992px) {
-        .templatecontainer, .templatecontainer-sm, .templatecontainer-md, .templatecontainer-lg {
-            max-width: 860px;
-        }
-    }
-    @media (min-width: 576px) (max-width: 768px) {
-        .templatecontainer, .templatecontainer-sm, .templatecontainer-md, .templatecontainer-lg {
-            max-width: 720px;
-        }
-    }
-    @media (max-width: 576px) {
-        .templatecontainer, .templatecontainer-sm, .templatecontainer-md, .templatecontainer-lg {
-            max-width: 540px;
-        }
-    }
     .table {
         width: 60%;
         margin-left: auto;
@@ -67,12 +47,53 @@
         line-height: 1.2;
         color: grey;
     }
-    /* .navbar-floating .header-navbar-shadow {
-        height: 70px;
-        background: #ffffff;
-        -webkit-box-shadow: 0 -3px 31px 0 rgb(0 0 0 / 5%), 0 6px 20px 0 rgb(0 0 0 / 2%);
-        box-shadow: 0 -3px 31px 0 rgb(0 0 0 / 5%), 0 6px 20px 0 rgb(0 0 0 / 2%);
-    } */
+    
+    @media only screen and (max-width: 1200px) {
+        .templatecontainer, .templatecontainer-sm, .templatecontainer-md, .templatecontainer-lg, .templatecontainer-xl {
+            max-width: 900px;
+        }
+        td h4{
+            font-size: 14px;
+        }
+        td p, td{
+            font-size: 12px;
+        }
+    }
+    @media only screen and (max-width: 992px) {
+        .templatecontainer, .templatecontainer-sm, .templatecontainer-md, .templatecontainer-lg {
+            max-width: 860px;
+        }
+
+    }
+    @media only screen and (max-width: 768px) {
+        .templatecontainer, .templatecontainer-sm, .templatecontainer-md, .templatecontainer-lg {
+            max-width: 720px;
+        }
+        td h4{
+            font-size: 12px;
+        }
+        td p, td{
+            font-size: 10px;
+        }
+        table.table {
+            width: 100%;
+        }
+    }
+    @media only screen and (max-width: 576px) {
+        html body .app-content{
+            padding: 0px !important;
+        }
+        .templatecontainer, .templatecontainer-sm, .templatecontainer-md, .templatecontainer-lg {
+            max-width: 540px;
+        }
+        td h4{
+            font-size: 10px;
+        }
+        td p, td{
+            font-size: 8px;
+        }
+    }   
+    
 </style>
 
 <body class="vertical-layout vertical-menu-modern  navbar-floating footer-static  " data-open="click"
@@ -130,75 +151,75 @@
                         </div>
                         <table class="table mt-2">
                             <tbody class="content-tpage">
-                                <tr colspan="12">
-                                    <td colspan="8">
+                                <tr>
+                                    <td>
                                         <h4>GRÜNER SALAY</h4>
                                         <p></p>
                                     </td>
-                                    <td colspan="4" style="text-align: right;">
+                                    <td style="text-align: right;">
                                         10.00
                                     </td>
                                 </tr>
-                                <tr colspan="12">
-                                    <td colspan="8">
+                                <tr>
+                                    <td>
                                         <h4>GEMISCHYER SALAY</h4>
                                         <p></p>
                                     </td>
-                                    <td colspan="4" style="text-align: right;">
+                                    <td style="text-align: right;">
                                         12.00
                                     </td>
                                 </tr>
-                                <tr colspan="12">
-                                    <td colspan="8">
+                                <tr>
+                                    <td>
                                         <h4>INSALAYA DI RUCOLA E PARMIGIANO</h4>
                                         <p>RUCOLA-SALAT MIT PARMESAN UND CHERRYTOMATEN</p>
                                     </td>
-                                    <td colspan="4" style="text-align: right;">
+                                    <td style="text-align: right;">
                                         14.00
                                     </td>
                                 </tr>
-                                <tr colspan="12">
-                                    <td colspan="8">
+                                <tr>
+                                    <td>
                                         <h4>INSALAYA CAPRESE YOMAYEN UND MOZZARELLA</h4>
                                         <p></p>
                                     </td>
-                                    <td colspan="4" style="text-align: right;">
+                                    <td style="text-align: right;">
                                         14.00
                                     </td>
                                 </tr>
-                                <tr colspan="12">
-                                    <td colspan="8">
+                                <tr>
+                                    <td>
                                         <h4>INSALAYA CAPRESE YOMAYEN UND MOZZARELLA</h4>
                                         <p></p>
                                     </td>
-                                    <td colspan="4" style="text-align: right;">
+                                    <td style="text-align: right;">
                                         16.00
                                     </td>
                                 </tr>
-                                <tr colspan="12">
-                                    <td colspan="8">
+                                <tr>
+                                    <td>
                                         <h4>INSALAYA CAPRESE CON BURRAYA</h4>
                                         <p></p>
                                     </td>
-                                    <td colspan="4" style="text-align: right;">
+                                    <td style="text-align: right;">
                                         16.00
                                     </td>
                                 </tr>
-                                <tr colspan="12">
-                                    <td colspan="8">
+                                <tr>
+                                    <td>
                                         <h4>INSALAYA CAPRESE CON BURRAYA</h4>
                                         <p></p>
                                     </td>
-                                    <td colspan="4" style="text-align: right;">
+                                    <td style="text-align: right;">
                                         16.00
                                     </td>
                                 </tr>
-                                <tr colspan="12">
-                                    <td colspan="8">
+                                <tr>
+                                    <td>
                                         <h4>GEGRILLYES GEMÜSE MIY BURRAYA</h4>
                                         <p></p>
                                     </td>
-                                    <td colspan="4" style="text-align: right;">
+                                    <td style="text-align: right;">
                                         16.00
                                     </td>
                                 </tr>
@@ -216,39 +237,39 @@
                         </div>
                         <table class="table mt-2">
                             <tbody class="content-tpage">
-                                <tr colspan="12">
-                                    <td colspan="8">
+                                <tr>
+                                    <td>
                                         <h4>WOLFBARSCH-FILEY</h4>
                                         <p>MIT OLIVENÖL, ZITRONETTE UND BEILAGE</p>
                                     </td>
-                                    <td colspan="4" style="text-align: right;">
+                                    <td style="text-align: right;">
                                         10.00
                                     </td>
                                 </tr>
-                                <tr colspan="12">
-                                    <td colspan="8">
+                                <tr>
+                                    <td>
                                         <h4>VARIAYION GEBRAYENER FISCH</h4>
                                         <p>MIT BEILAGE</p>
                                     </td>
-                                    <td colspan="4" style="text-align: right;">
+                                    <td style="text-align: right;">
                                         12.00
                                     </td>
                                 </tr>
-                                <tr colspan="12">
-                                    <td colspan="8">
+                                <tr>
+                                    <td>
                                         <h4>YAGES FISCH</h4>
                                         <p></p>
                                     </td>
-                                    <td colspan="4" style="text-align: right;">
+                                    <td style="text-align: right;">
                                         14.00
                                     </td>
                                 </tr>
-                                <tr colspan="12">
-                                    <td colspan="8">
+                                <tr>
+                                    <td>
                                         <h4>GAMBERO ROSSO ALL‘AGLIO E PEPERONCINO</h4>
                                         <p>ROTE GARNELEN (ARGENTINIEN), KNOBLAUCH UND SCHARFE PAPRIKA</p>
                                     </td>
-                                    <td colspan="4" style="text-align: right;">
+                                    <td style="text-align: right;">
                                         14.00
                                     </td>
                                 </tr>
