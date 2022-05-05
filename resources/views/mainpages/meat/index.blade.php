@@ -142,26 +142,29 @@
                                 <span><img src={{asset("/assets/images/Template/complex/right-shape.png")}} alt="right" /></span>
                             </div>
                         </div>
-                        @foreach ($categories as $category)
-                            @if ($category->id == 9)
-                                <table class="table mt-2">
-                                    <tbody class="content-tpage">
-                                        @foreach ($category->contents as $content)
-                                            <tr>
-                                                <td>
-                                                    <h4 id="content-title-{{$content->id}}">{{$content->title}}</h4>
-                                                    <p id="content-desc-{{$content->id}}">{{$content->description}}</p>
-                                                </td>
-                                                <td style="text-align: right;" id="content-num-{{$content->id}}">
-                                                    {{$content->number}}
-                                                </td>
-                                            </tr>
-                                    
-                                        @endforeach
-                                    </tbody>
-                                </table> 
-                            @endif
-                        @endforeach
+                        <div id="table_view">
+                            @foreach ($categories as $category)
+                                @if ($category->id == $loop->first)
+                                    <table class="table mt-2">
+                                        <tbody class="content-tpage">
+                                            @foreach ($category->contents as $content)
+                                                <tr>
+                                                    <td>
+                                                        <h4 id="content-title-{{$content->id}}">{{$content->title}}</h4>
+                                                        <p id="content-desc-{{$content->id}}">{{$content->description}}</p>
+                                                    </td>
+                                                    <td style="text-align: right;" id="content-num-{{$content->id}}">
+                                                        {{$content->number}}
+                                                    </td>
+                                                </tr>
+                                        
+                                            @endforeach
+                                        </tbody>
+                                    </table> 
+                                @endif
+                            @endforeach
+                        </div>
+                        
                     </div>
                 
                 <!-- Centered Aligned Tabs ends -->
@@ -178,8 +181,26 @@
         $('#cate_id').on('change', function(e){
             var cate_val = $(this).val();
             console.log('cate_val', cate_val);
+            var url = "{{route ('category.get')}}";
 
-            var data = "@foreach ($categories as $category)@if($category->id == "+cate_val+")<table class='table mt-2'><tbody class='content-tpage'>@foreach ($category->contents as $content)<tr><td><h4 id='content-title-{{$content->id}}'>{{$content->title}}</h4><p id='content-desc-{{$content->id}}'>{{$content->description}}</p></td><td style='text-align: right;' id='content-num-{{$content->id}}'>{{$content->number}}</td></tr>@endforeach</tbody></table>@endif@endforeach";
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: url,
+                data: {id : cate_val},
+                success: function(data) {
+                    if(data['success']){
+                        console.log('contents', data['contents']);
+                        toastr["success"]("Changed Successfully.");
+                    }
+                    else{
+                        toastr["error"]("Error.");
+                    }
+                }
+            });
+            
         });
     </script>
 </body>

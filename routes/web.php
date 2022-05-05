@@ -55,7 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::post('res-create', [RestaurantController::class, 'create'])->name('restaurant.create');
     Route::post('res-remove/{id}', [RestaurantController::class, 'remove'])->name('restaurant.remove');
     
-
+    Route::post('cate-get', [MenupageController::class, 'categet'])->name('category.get');
 });
 
 //clear cache

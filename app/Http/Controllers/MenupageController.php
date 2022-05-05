@@ -154,5 +154,16 @@ class MenupageController extends Controller
             return response()->json(['success'=>false]);
         }
     }
+
+    public function categet(Request $request){
+        try{
+            $cate_id = $request->id;
+            $contents = Content::where('category_id', $cate_id)->get();
+            return response()->json(['success'=>true, 'contents'=>$contents]);
+        }
+        catch(Exception $e){
+            return response()->json(['success'=>false]);
+        }
+    }
     
 }
