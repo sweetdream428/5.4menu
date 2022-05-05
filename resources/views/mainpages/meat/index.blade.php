@@ -124,13 +124,12 @@
         <div class="app-content content m-0">
             <div class="content-overlay"></div>
             <div class="content-wrapper">
-                <!-- Centered Aligned Tabs starts -->
-                                              
+                <!-- Centered Aligned Tabs starts -->                 
                     <div class="pt-3">
                         
-                        <div>
+                        {{-- <div>
                             <img src={{asset("/assets/images/Template/complex/temp-logo.png")}} alt="template logo" style="display: block;margin:auto;" />
-                        </div>
+                        </div> --}}
                         
                         <div id="table_view">
                             
@@ -139,7 +138,6 @@
                             
                         </div>
                     </div>
-                
                 <!-- Centered Aligned Tabs ends -->
             </div>
         </div>
@@ -157,7 +155,7 @@
         refresh()
         $(document).on('change', '#cate_id', function(e){
             selCategory = $('#cate_id').val();
-            refresh()
+            refresh();
         });
         var selCategory = '{{$firstid}}';
         function refresh() {
@@ -184,6 +182,7 @@
                         var data = "<table id='tb_main' class='table mt-2'><tbody class='content-tpage'>"+content+"</tbody></table>";
                         $('#table_view').html(data);
                         $('#main_test').empty();
+                        $('#table_view').show();
                         refreshPdf();
                         $('#table_view').hide();
                     }
@@ -202,7 +201,6 @@
 
             var temp_tbody = document.createElement("tbody");
             $(temp_tbody).addClass('content-tpage');
-            
             
             while(j < children.length ){
                 console.log(children[j], children.eq(j).height())
@@ -225,7 +223,8 @@
                 $(children[j]).clone().appendTo(temp_tbody);
                 j++;
             }
-            console.log(temp_height)
+
+            console.log(temp_height);
             let page_view_div = document.createElement("div");
             let tbl = document.createElement("table");
             $(tbl).addClass('table');
@@ -234,6 +233,7 @@
             page_view_div.append(tbl);
             $('#main_test').append(page_view_div);
             $(page_view_div).addClass('page-view');
+            
             $('.page-view').first().prepend(header);
             $('#cate_id').val(selCategory);
         }
