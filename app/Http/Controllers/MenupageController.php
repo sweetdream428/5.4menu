@@ -34,13 +34,13 @@ class MenupageController extends Controller
         }
     }
     public function createpage($pagename, $id){
-        $menu_name = Page::where('id', $id)->get()[0]->pagename;
+        $pages = Page::where('id', $id)->get();
         $categories = Category::where('page_id', $id)->get();
         $firstids = DB::table('categories')->where('page_id', $id)->orderBy('id')->get('id')->count() ? DB::table('categories')->where('page_id', $id)->orderBy('id')->get('id') : '';
         
         $firstid = $firstids ? $firstids[0]->id : '';
         
-        return view('pages.lunch.index')->with('pagename', $pagename)->with('page_id', $id)->with('categories', $categories)->with('firstid', $firstid)->with('menu_name', $menu_name);
+        return view('pages.lunch.index')->with('pagename', $pagename)->with('page_id', $id)->with('categories', $categories)->with('firstid', $firstid)->with('pages', $pages);
     }
 
     public function pageremove($id){
@@ -135,11 +135,12 @@ class MenupageController extends Controller
     }
 
     public function pageview($pagename, $id){
+        $pages = Page::where('id', $id)->get();
         $categories = Category::where('page_id', $id)->get();
         $firstids = DB::table('categories')->where('page_id', $id)->orderBy('id')->get('id')->count() ? DB::table('categories')->where('page_id', $id)->orderBy('id')->get('id') : '';
         
         $firstid = $firstids ? $firstids[0]->id : '';
-        return view('mainpages.'.$pagename.'.index')->with('categories', $categories)->with('firstid', $firstid);
+        return view('mainpages.'.$pagename.'.index')->with('categories', $categories)->with('firstid', $firstid)->with('pages', $pages);
     }
     
     public function pagenamesave(Request $request){        
@@ -147,6 +148,19 @@ class MenupageController extends Controller
             $id = $request->id;
             Page::where('id', $id)->update([
                 'pagename' => $request->menu_name
+            ]);
+            return response()->json(['success'=>true]);
+        }
+        catch(Exception $e){
+            return response()->json(['success'=>false]);
+        }
+    }
+
+    public function footersave(Request $request){        
+        try{
+            $id = $request->id;
+            Page::where('id', $id)->update([
+                'footer_text' => $request->footer_text
             ]);
             return response()->json(['success'=>true]);
         }

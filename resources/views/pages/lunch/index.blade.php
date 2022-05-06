@@ -29,6 +29,10 @@
     .nav-tabs .nav-item:hover .remove-icon-position, .nav-tabs .nav-item:hover .edit-icon-position{
         display: block;
     }
+    .footer-text-edit{
+        width: 50%;
+        margin: 0 auto;
+    }
 
 </style>
 
@@ -49,105 +53,117 @@
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
         <div class="content-wrapper">
-            <div class="content-header row d-flex justify-content-between align-items-center">
-                <div class="content-header-left col-md-9 col-12 mb-2">
-                    <div class="row breadcrumbs-top">
-                        <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0" style="text-transform: capitalize;">
-                                {{ $pagename }}</h2>
-                            <div class="breadcrumb-wrapper">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="/menupage">Menupage</a>
-                                    </li>
-                                    <li class="breadcrumb-item">
-                                        <a href="#">{{ $pagename }}</a>
-                                    </li>
-                                    <li class="breadcrumb-item">
-                                        <a href="#">{{ $page_id }}</a>
-                                    </li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-12 mb-2">
-                    <label for="basicInput">Menu Name</label>
-                    <div class="d-flex justify-content-between">
-                        <input type="text" class="form-control menu_name" placeholder="Menu Name" value="{{$menu_name}}"/>
-                        <button type="button" class="btn btn-primary ml-1 menu_name_save" data-id="{{ $page_id }}">Save</button>
-                    </div>
-                </div>
-            </div>
-            <div class="content-body">
-                <section id="nav-tabs-aligned">
-                    <div class="row match-height">
-                        <!-- Centered Aligned Tabs starts -->
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <ul class="nav nav-tabs justify-content-center" role="tablist">
-                                        <div>
-                                            <div class="form-modal-ex">
-                                                <!-- Button trigger modal -->
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-cate-create">
-                                                    Add
-                                                </button>
-                                            </div>
-                                        </div>
-                                        @foreach ($categories as $category)
-                                            <li class="nav-item">
-                                                <a class="nav-link {{$category->id == $firstid ? 'active' : ''}}" id="tab-category-{{$category->id}}" data-toggle="tab" href="#category-{{$category->id}}" aria-controls="category-{{$category->id}}" role="tab" aria-selected="true">
-                                                    {{$category->name}}
-                                                </a>
-                                                <i class="edit-icon-position" data-id="{{$category->id}}" data-name="{{$category->name}}">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                                </i>
-                                                <i class="remove-icon-position" data-id="{{$category->id}}">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                                                </i>
-                                            </li>
-                                        @endforeach
-                                        
-                                    </ul>
-                                    <div class="tab-content mt-3">
-                                        @foreach ($categories as $category)
-                                            <div class="tab-pane {{$category->id == $firstid ?'active' : ''}}" id="category-{{$category->id}}" role="tabpanel">
-                                                <p>
-                                                    <h2 id="content-all-title-{{$category->id}}">{{$category->name}}</h2>
-                                                    <button type="button" class="btn btn-primary btn-add-content" data-toggle="modal" data-category_id="{{$category->id}}">Add</button>
-                                                </p>
-
-                                                <table class="table">
-                                                    <tbody class="content-tpage">
-                                                        @foreach ($category->contents as $content)
-                                                            <tr>
-                                                                <td>
-                                                                    <h4 id="content-title-{{$content->id}}">{{$content->title}}</h4>
-                                                                    <p id="content-desc-{{$content->id}}">{{$content->description}}</p>
-                                                                </td>
-                                                                <td id="content-num-{{$content->id}}">{{$content->number}}</td>
-                                                                <td>
-                                                                    <i class="edit-content-position" id="edit-content-position{{$content->id}}" data-id="{{$content->id}}" data-title="{{$content->title}}" data-description="{{$content->description}}" data-number="{{$content->number}}">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                                                    </i>
-                                                                    <i class="remove-content-position ml-1" data-id="{{$content->id}}">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                                                                    </i>
-                                                                </td>
-                                                            </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        @endforeach                                        
-                                    </div>
+            @foreach ($pages as $page)
+                <div class="content-header row d-flex justify-content-between align-items-center">
+                    <div class="content-header-left col-md-9 col-12 mb-2">
+                        <div class="row breadcrumbs-top">
+                            <div class="col-12">
+                                <h2 class="content-header-title float-left mb-0" style="text-transform: capitalize;">
+                                    {{ $pagename }}</h2>
+                                <div class="breadcrumb-wrapper">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="/menupage">Menupage</a>
+                                        </li>
+                                        <li class="breadcrumb-item">
+                                            <a href="#">{{ $pagename }}</a>
+                                        </li>
+                                        <li class="breadcrumb-item">
+                                            <a href="#">{{ $page_id }}</a>
+                                        </li>
+                                    </ol>
                                 </div>
                             </div>
                         </div>
-                        <!-- Centered Aligned Tabs ends -->
                     </div>
-                </section>
-            </div>
+                    <div class="col-md-3 col-12 mb-2">
+                        <label for="basicInput">Menu Name</label>
+                        <div class="d-flex justify-content-between">
+                            <input type="text" class="form-control menu_name" placeholder="Menu Name" value="{{$page->pagename}}"/>
+                            <button type="button" class="btn btn-primary ml-1 menu_name_save" data-id="{{ $page_id }}">Save</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-body">
+                    <section id="nav-tabs-aligned">
+                        <div class="row match-height">
+                            <!-- Centered Aligned Tabs starts -->
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <ul class="nav nav-tabs justify-content-center" role="tablist">
+                                            <div>
+                                                <div class="form-modal-ex">
+                                                    <!-- Button trigger modal -->
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-cate-create">
+                                                        Add
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            @foreach ($categories as $category)
+                                                <li class="nav-item">
+                                                    <a class="nav-link {{$category->id == $firstid ? 'active' : ''}}" id="tab-category-{{$category->id}}" data-toggle="tab" href="#category-{{$category->id}}" aria-controls="category-{{$category->id}}" role="tab" aria-selected="true">
+                                                        {{$category->name}}
+                                                    </a>
+                                                    <i class="edit-icon-position" data-id="{{$category->id}}" data-name="{{$category->name}}">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                                                    </i>
+                                                    <i class="remove-icon-position" data-id="{{$category->id}}">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                                    </i>
+                                                </li>
+                                            @endforeach
+                                            
+                                        </ul>
+                                        <div class="tab-content mt-3">
+                                            @foreach ($categories as $category)
+                                                <div class="tab-pane {{$category->id == $firstid ?'active' : ''}}" id="category-{{$category->id}}" role="tabpanel">
+                                                    <p>
+                                                        <h2 id="content-all-title-{{$category->id}}">{{$category->name}}</h2>
+                                                        <button type="button" class="btn btn-primary btn-add-content" data-toggle="modal" data-category_id="{{$category->id}}">Add</button>
+                                                    </p>
+
+                                                    <table class="table">
+                                                        <tbody class="content-tpage">
+                                                            @foreach ($category->contents as $content)
+                                                                <tr>
+                                                                    <td>
+                                                                        <h4 id="content-title-{{$content->id}}">{{$content->title}}</h4>
+                                                                        <p id="content-desc-{{$content->id}}">{{$content->description}}</p>
+                                                                    </td>
+                                                                    <td id="content-num-{{$content->id}}">{{$content->number}}</td>
+                                                                    <td>
+                                                                        <i class="edit-content-position" id="edit-content-position{{$content->id}}" data-id="{{$content->id}}" data-title="{{$content->title}}" data-description="{{$content->description}}" data-number="{{$content->number}}">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                                                                        </i>
+                                                                        <i class="remove-content-position ml-1" data-id="{{$content->id}}">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                                                        </i>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            @endforeach                                        
+                                        </div>
+                                        <div class="footer-text-edit">
+                                            <textarea class="form-control" id="footer-text" rows="3" placeholder="text...">{{$page->footer_text}}</textarea>
+                                            <div class="col-12 d-flex justify-content-center mt-2">
+                                                <button type="button" class="footer-save-btn btn btn-primary" data-id="{{ $page_id }}">
+                                                    Save
+                                                </button>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Centered Aligned Tabs ends -->
+                        </div>
+                    </section>
+                </div>
+            @endforeach
+            
         </div>
     </div>
     <!-- END: Content-->
@@ -499,6 +515,29 @@
                 type: 'post',
                 url: url,
                 data: {menu_name : menu_name, id : id},
+                success: function(data) {
+                    if(data['success']){
+                        toastr["success"]("Changed Successfully.");
+                    }
+                    else{
+                        toastr["error"]("Error.");
+                    }
+                }
+            });
+        });
+
+        $('.footer-save-btn').on('click', function(e){
+            var footer_text = $('#footer-text').val();
+            var id = $(this).data('id');
+            var url = "{{route ('footersave')}}";
+            
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: url,
+                data: {footer_text : footer_text, id : id},
                 success: function(data) {
                     if(data['success']){
                         toastr["success"]("Changed Successfully.");

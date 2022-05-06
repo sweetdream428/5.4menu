@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('pagename')->nullable();
             $table->string('name');
             $table->string('owner');
+            $table->text('footer_text')->nullable();
             $table->timestamps();
         });
     }

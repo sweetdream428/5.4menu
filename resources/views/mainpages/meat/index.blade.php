@@ -9,8 +9,15 @@
     body{
         background-color: #F6F5E6 !important;
     }
-    td .p {
+    td .p{
         font-size: 14px !important;
+    }
+    .footer-exp{
+        font-size: 14px;
+        margin-top: 20px;
+        width: 60%;
+        margin-left: auto;
+        margin-right: auto;
     }
     .page-view{
         background : url('{{ asset("/assets/images/Template/complex/template-background.png") }} ');
@@ -18,6 +25,7 @@
         background-position: center top;
         height: 1000px;
         padding: 70px;
+        
     }
     .table td {
         border-top: none;
@@ -55,17 +63,17 @@
         td h4{
             font-size: 14px;
         }
-        td p, td{
+        td p, td, .footer-exp{
             font-size: 12px;
         }
     }
-    @media (min-width: 768px) and (max-width: 992px) {
+    @media only screen and (max-width: 992px) {
         .templatecontainer, .templatecontainer-sm, .templatecontainer-md, .templatecontainer-lg {
             max-width: 860px;
         }
 
     }
-    @media (min-width: 576px) (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
         .templatecontainer, .templatecontainer-sm, .templatecontainer-md, .templatecontainer-lg {
             max-width: 720px;
         }
@@ -78,6 +86,10 @@
         table.table {
             width: 100% !important;
         }
+        .page-view .footer-exp{
+            width: 100%;
+            font-size: 10px;
+        }
     }
     @media (max-width: 576px) {
         html body .app-content{
@@ -89,7 +101,7 @@
         td h4{
             font-size: 12px;
         }
-        td p, td{
+        td p, td, .footer-exp{
             font-size: 10px;
         }
         .table {
@@ -105,7 +117,7 @@
         td h4{
             font-size: 12px;
         }
-        td p, td{
+        td p, td, .footer-exp{
             font-size: 10px;
         }
         .table {
@@ -126,7 +138,7 @@
             <div class="content-wrapper">
                 <!-- Centered Aligned Tabs starts -->                 
                     <div class="pt-3">
-                        
+
                         {{-- <div>
                             <img src={{asset("/assets/images/Template/complex/temp-logo.png")}} alt="template logo" style="display: block;margin:auto;" />
                         </div> --}}
@@ -146,12 +158,14 @@
 
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
-
+    
     @include('layouts.footer')
     <script>
 
         var header = "<div class='mt-2' style='width: 100%;text-align: center;'><div style='margin:0 auto;' class='d-flex justify-content-center'><span><img src={{asset('/assets/images/Template/complex/left-shape.png')}} alt='left' /></span><span class='text-uppercase' style='font-weight:500;font-size: 18px;color:gray;'><select class='form-control' id='cate_id' style='background-color: #F6F5E6;'>@foreach ($categories as $category)<option value='{{$category->id}}'>{{$category->name}}</option>@endforeach</select></span><span><img src={{asset('/assets/images/Template/complex/right-shape.png')}} alt='right' /></span></div></div>";
 
+        var footer = `<div class='d-flex justify-content-center footer-exp text-uppercase'>@foreach ($pages as $page){{ $page->footer_text }}@endforeach</div>`;
+        
         refresh()
         $(document).on('change', '#cate_id', function(e){
             selCategory = $('#cate_id').val();
@@ -235,6 +249,7 @@
             $(page_view_div).addClass('page-view');
             
             $('.page-view').first().prepend(header);
+            $('.page-view').last().append(footer);
             $('#cate_id').val(selCategory);
         }
         

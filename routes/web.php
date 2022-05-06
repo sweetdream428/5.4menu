@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::post('menupage-remove/{id}', [MenupageController::class, 'pageremove']);
     Route::get('menupage/{pagename}/{id}', [MenupageController::class, 'createpage']);
     Route::post('pagenamesave', [MenupageController::class, 'pagenamesave'])->name('pagenamesave');
+    Route::post('footersave', [MenupageController::class, 'footersave'])->name('footersave');
 
     Route::post('category-create', [MenupageController::class, 'categorycreate'])->name('category.create');
     Route::post('category-update', [MenupageController::class, 'categoryupdate'])->name('category.update');
