@@ -52,6 +52,7 @@
                                                                         <p id="content-desc-{{$content->id}}">{{$content->description}}</p>
                                                                     </td>
                                                                     <td id="content-num-{{$content->id}}">{{$content->number}}</td>
+                                                                    <td id="content-size-{{$content->id}}">{{$content->size}}</td>
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>
