@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('description');
             $table->string('number');
+            $table->string('size');
             $table->timestamps();
         });
     }
