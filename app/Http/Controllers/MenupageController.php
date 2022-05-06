@@ -98,6 +98,7 @@ class MenupageController extends Controller
             $content->title = $request->title ? $request->title : '';
             $content->description = $request->description ? $request->description : '';
             $content->number = $request->number ? $request->number : '';
+            $content->size = $request->size ? $request->size : '';
             $content->save();
             
             $id = $content->id;
@@ -114,7 +115,8 @@ class MenupageController extends Controller
             Content::where('id', $id)->update([
                 'title' => $request->title ? $request->title : '',
                 'description' => $request->description ? $request->description : '',
-                'number' => $request->number ? $request->number : ''
+                'number' => $request->number ? $request->number : '',
+                'size' => $request->size ? $request->size : ''
             ]);
             return response()->json(['success'=>true]);
         }
