@@ -119,7 +119,9 @@
         }
         td p, td, .footer-exp{
             font-size: 10px;
+            line-height: 1.0rem !important;
         }
+        
         .table {
             width: 100%;
             margin-left: auto;
