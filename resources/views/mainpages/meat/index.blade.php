@@ -193,7 +193,7 @@
                             content = content + "<tr><td><h4>" + contents[i].title + "</h4><p>" + contents[i].description + "</p></td><td style='text-align: right;'>" + contents[i].number + "</td><td>" + contents[i].size + "</td></tr>";
                         }
                         var data = "<table id='tb_main' class='table mt-2'><tbody class='content-tpage'>"+content+"</tbody></table>" + footer;
-                        console.log('data----------->', data);
+                        
                         $('#table_view').html(data);
                         $('#main_test').empty();
                         $('#table_view').show();
