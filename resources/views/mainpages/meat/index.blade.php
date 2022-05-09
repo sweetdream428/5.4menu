@@ -23,9 +23,10 @@
         background : url('{{ asset("/assets/images/Template/complex/template-background.png") }} ');
         background-repeat: no-repeat;
         background-position: center top;
-        height: 1000px;
+        height: 930px;
         padding: 70px 70px 0px 70px;
-        
+        margin-bottom: 30px;
+        overflow: hidden;
     }
     .table td {
         border-top: none;
@@ -135,8 +136,9 @@
                         {{-- <div>
                             <img src={{asset("/assets/images/Template/complex/temp-logo.png")}} alt="template logo" style="display: block;margin:auto;" />
                         </div> --}}
+                        {{-- <div class='mt-2' style='width: 100%;text-align: center;'><div style='margin:0 auto;' class='d-flex justify-content-center'><span><img src={{asset('/assets/images/Template/complex/left-shape.png')}} alt='left' /></span><span class='text-uppercase' style='font-weight:500;font-size: 18px;color:gray;'><select class='form-control' id='cate_id' style='background-color: #F6F5E6;'>@foreach ($categories as $category)<option value='{{$category->id}}'>{{$category->name}}</option>@endforeach</select></span><span><img src={{asset('/assets/images/Template/complex/right-shape.png')}} alt='right' /></span></div></div> --}}
                         
-                        <div id="table_view">
+                        <div id="table_view" class="page-view">
                             
                         </div>
                         <div id="main_test">
@@ -147,6 +149,9 @@
             </div>
         </div>
         <!-- END: Content-->
+    </div>
+    <div style="height: 100px;">
+
     </div>
 
     <div class="sidenav-overlay"></div>
@@ -169,7 +174,6 @@
         var selCategory = '{{$firstid}}';
         function refresh() {
             var cate_val = $('#cate_id').val() ? $('#cate_id').val() : '{{$firstid}}';
-            console.log('cate_val', cate_val);
             var url = "{{route ('category.get')}}";
 
             $.ajax({
@@ -189,6 +193,7 @@
                             content = content + "<tr><td><h4>" + contents[i].title + "</h4><p>" + contents[i].description + "</p></td><td style='text-align: right;'>" + contents[i].number + "</td><td>" + contents[i].size + "</td></tr>";
                         }
                         var data = "<table id='tb_main' class='table mt-2'><tbody class='content-tpage'>"+content+"</tbody></table>" + footer;
+                        console.log('data----------->', data);
                         $('#table_view').html(data);
                         $('#main_test').empty();
                         $('#table_view').show();
@@ -203,26 +208,26 @@
             });
         }
         function refreshPdf() {
-            var foo_hei = $('.footer-exp').height() + 30;
-            console.log('foo_hei', foo_hei)
+            var foo_hei = $('.footer-exp').height();
+            var head_hei = 40;
             var j = 0;
             var children = $("#tb_main").find('tr');
-            var max_height = 755;
+            var max_height = 820;
             var temp_height = 0;
-
+            
             var temp_tbody = document.createElement("tbody");
             $(temp_tbody).addClass('content-tpage');
             
             while(j < children.length ){
-                
+                if(j == 0){
+                    temp_height += head_hei;
+                }
                 temp_height += children.eq(j).height();
                 
-                if(j == 0){
+                if(j === children.length-1){
                     temp_height += foo_hei;
                 }
-                
                 if (temp_height > max_height) {
-                    console.log(temp_tbody);
                     let page_view_div = document.createElement("div");
                     let tbl = document.createElement("table");
                     $(tbl).addClass('table');
@@ -234,14 +239,14 @@
                     temp_tbody = document.createElement("tbody");
                     $(temp_tbody).addClass('content-tpage');
                     
-                    $(page_view_div).addClass('page-view');                        
+                    $(page_view_div).addClass('page-view page-response');
+                    j = j-1;                       
                 }
-                $(children[j]).clone().appendTo(temp_tbody);
+                $(children[j]).appendTo(temp_tbody);
+                
                 j++;
-                console.log('temp_height', temp_height);
             }
 
-            // console.log('temp_height', temp_height);
             let page_view_div = document.createElement("div");
             let tbl = document.createElement("table");
             $(tbl).addClass('table');
@@ -249,10 +254,10 @@
             tbl.append(temp_tbody)
             page_view_div.append(tbl);
             $('#main_test').append(page_view_div);
-            $(page_view_div).addClass('page-view');
+            $(page_view_div).addClass('page-view page-response');
             
-            $('.page-view').first().prepend(header);
-            $('.page-view').last().append(footer);
+            $('.page-response').first().prepend(header);
+            $('.page-response').last().append(footer);
             $('#cate_id').val(selCategory);
         }
         
