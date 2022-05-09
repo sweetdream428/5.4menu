@@ -207,8 +207,8 @@
             console.log('foo_hei', foo_hei)
             var j = 0;
             var children = $("#tb_main").find('tr');
-            var max_height = 800;
-            var temp_height = 40;
+            var max_height = 755;
+            var temp_height = 0;
 
             var temp_tbody = document.createElement("tbody");
             $(temp_tbody).addClass('content-tpage');

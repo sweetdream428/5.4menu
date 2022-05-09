@@ -58,7 +58,7 @@ class MenupageController extends Controller
             $category = new Category;
             $category->name = $request->name ? $request->name : '';
             $category->page_id = $request->page_id;
-            $category->sequence = $request->sequence;
+            $category->sequence = $request->sequence ? $request->sequence : '';
             $category->save();
             $id = $category->id;
             return response()->json(['success'=>$id]);
@@ -142,8 +142,8 @@ class MenupageController extends Controller
 
     public function pageview($pagename, $id){
         $pages = Page::where('id', $id)->get();
-        $categories = Category::where('page_id', $id)->get();
-        $firstids = DB::table('categories')->where('page_id', $id)->orderBy('id')->get('id')->count() ? DB::table('categories')->where('page_id', $id)->orderBy('id')->get('id') : '';
+        $categories = Category::where('page_id', $id)->orderBy('sequence')->get();
+        $firstids = DB::table('categories')->where('page_id', $id)->orderBy('id')->get('id')->count() ? DB::table('categories')->where('page_id', $id)->orderBy('sequence')->get('id') : '';
         
         $firstid = $firstids ? $firstids[0]->id : '';
         return view('mainpages.'.$pagename.'.index')->with('categories', $categories)->with('firstid', $firstid)->with('pages', $pages);
@@ -179,7 +179,7 @@ class MenupageController extends Controller
         try{
             
             $cate_id = $request->id;
-            $contents = Content::where('category_id', $cate_id)->get();
+            $contents = Content::where('category_id', $cate_id)->orderBy('sequence')->get();
             return response()->json(['success'=>true, 'contents'=>$contents]);
         }
         catch(Exception $e){

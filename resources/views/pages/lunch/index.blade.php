@@ -337,11 +337,12 @@
                 },
                 type: 'post',
                 url: url,
-                data: {name : category_text, page_id : page_id},
+                data: {name : category_text, page_id : page_id, sequence: category_sequence},
                 success: function(data) {
                     if(data['success']){
                         $('#modal-cate-create').modal('hide');
                         $('.category-text').val('');
+                        $('.category-sequence').val('');
                         var id = data['success'];
                         $('.nav-tabs').append("<li class='nav-item'><a class='nav-link' id='tab-category-"+id+"' data-toggle='tab' href='#category-"+id+"' aria-controls='category-"+id+"' role='tab' aria-selected='false'>"+category_text+"</a><i class='edit-icon-position' edit-icon-position"+id+" data-id="+id+" data-sequence="+category_sequence+" data-name="+category_text+"><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-edit-2'><path d='M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z'></path></svg></i><i class='remove-icon-position' data-id="+id+"><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-x'><line x1='18' y1='6' x2='6' y2='18'></line><line x1='6' y1='6' x2='18' y2='18'></line></svg></i></li>");
                         
