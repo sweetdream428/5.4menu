@@ -35,8 +35,8 @@ class MenupageController extends Controller
     }
     public function createpage($pagename, $id){
         $pages = Page::where('id', $id)->get();
-        $categories = Category::where('page_id', $id)->get();
-        $firstids = DB::table('categories')->where('page_id', $id)->orderBy('id')->get('id')->count() ? DB::table('categories')->where('page_id', $id)->orderBy('id')->get('id') : '';
+        $categories = Category::where('page_id', $id)->orderBy('sequence')->get();
+        $firstids = DB::table('categories')->where('page_id', $id)->orderBy('id')->get('id')->count() ? DB::table('categories')->where('page_id', $id)->orderBy('sequence')->get('id') : '';
         
         $firstid = $firstids ? $firstids[0]->id : '';
         
@@ -58,6 +58,7 @@ class MenupageController extends Controller
             $category = new Category;
             $category->name = $request->name ? $request->name : '';
             $category->page_id = $request->page_id;
+            $category->sequence = $request->sequence;
             $category->save();
             $id = $category->id;
             return response()->json(['success'=>$id]);
@@ -71,7 +72,8 @@ class MenupageController extends Controller
         try{
             $id = $request->id;
             Category::where('id', $id)->update([
-                'name' => $request->name ? $request->name : ''
+                'name' => $request->name ? $request->name : '',
+                'sequence' => $request->sequence ? $request->sequence : ''
             ]);
             return response()->json(['success'=>true]);
         }
@@ -99,6 +101,7 @@ class MenupageController extends Controller
             $content->description = $request->description ? $request->description : '';
             $content->number = $request->number ? $request->number : '';
             $content->size = $request->size ? $request->size : '';
+            $content->sequence = $request->sequence ? $request->sequence : '';
             $content->save();
             
             $id = $content->id;
@@ -116,7 +119,8 @@ class MenupageController extends Controller
                 'title' => $request->title ? $request->title : '',
                 'description' => $request->description ? $request->description : '',
                 'number' => $request->number ? $request->number : '',
-                'size' => $request->size ? $request->size : ''
+                'size' => $request->size ? $request->size : '',
+                'sequence' => $request->sequence ? $request->sequence : ''
             ]);
             return response()->json(['success'=>true]);
         }

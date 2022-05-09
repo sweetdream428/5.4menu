@@ -104,7 +104,7 @@
                                                     <a class="nav-link {{$category->id == $firstid ? 'active' : ''}}" id="tab-category-{{$category->id}}" data-toggle="tab" href="#category-{{$category->id}}" aria-controls="category-{{$category->id}}" role="tab" aria-selected="true">
                                                         {{$category->name}}
                                                     </a>
-                                                    <i class="edit-icon-position" data-id="{{$category->id}}" data-name="{{$category->name}}">
+                                                    <i class="edit-icon-position" id="edit-icon-position{{$category->id}}" data-id="{{$category->id}}" data-sequence="{{$category->sequence}}" data-name="{{$category->name}}">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
                                                     </i>
                                                     <i class="remove-icon-position" data-id="{{$category->id}}">
@@ -133,7 +133,7 @@
                                                                     <td id="content-num-{{$content->id}}">{{$content->number}}</td>
                                                                     <td id="content-size-{{$content->id}}">{{$content->size}}</td>
                                                                     <td>
-                                                                        <i class="edit-content-position" id="edit-content-position{{$content->id}}" data-id="{{$content->id}}" data-title="{{$content->title}}" data-description="{{$content->description}}" data-number="{{$content->number}}" data-size="{{$content->size}}">
+                                                                        <i class="edit-content-position" id="edit-content-position{{$content->id}}" data-id="{{$content->id}}" data-title="{{$content->title}}" data-description="{{$content->description}}" data-number="{{$content->number}}" data-sequence="{{$content->sequence}}" data-size="{{$content->size}}">
                                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
                                                                         </i>
                                                                         <i class="remove-content-position ml-1" data-id="{{$content->id}}">
@@ -181,6 +181,10 @@
                 </div>
                 <form action="#" class="form-cate-create">
                     <div class="modal-body">
+                        <label>Sequence: </label>
+                        <div class="form-group">
+                            <input type="number" placeholder="1" step="1" class="form-control category-sequence"/>
+                        </div>
                         <label>Category Name: </label>
                         <div class="form-group">
                             <input type="text" placeholder="Category" class="form-control category-text"/>
@@ -207,23 +211,24 @@
                 </div>
                 <form action="#" class="form-content-create">
                     <div class="modal-body">
+                        <label>Sequence: </label>
+                        <div class="form-group">
+                            <input type="number" placeholder="1" step="1" class="form-control" id="con-sequence"/>
+                        </div>
+
                         <label>Title: </label>
                         <div class="form-group">
                             <input type="text" placeholder="Title" class="form-control" id="con-title"/>
                             <input type="hidden" id="cate_con_id"/>
                         </div>
-                    </div>
-                    <div class="modal-body">
+
                         <label>Content: </label>
                         <textarea class="form-control" id="con-desc" rows="3" placeholder="Content..."></textarea>
-                    </div>
-                    <div class="modal-body">
+
                         <label>Price: </label>
                         <div class="form-group">
                             <input type="number" step="0.01" placeholder="27.5" class="form-control" id="con-num"/>
                         </div>
-                    </div>
-                    <div class="modal-body">
                         <label>Size: </label>
                         <div class="form-group">
                             <input type="text" placeholder="27.5" class="form-control" id="con-size"/>
@@ -249,6 +254,11 @@
                 </div>
                 <form action="#" class="form-cate-edit">
                     <div class="modal-body">
+                        <label>Sequence: </label>
+                        <div class="form-group">
+                            <input type="number" placeholder="1" step="1" class="form-control" id="u-sequence"/>
+                        </div>
+
                         <label>Category Name: </label>
                         <div class="form-group">
                             <input type="text" placeholder="Category" id="u-category" class="form-control"/>
@@ -275,23 +285,25 @@
                 </div>
                 <form action="#" class="form-cont-edit">
                     <div class="modal-body">
+                        <label>Sequence: </label>
+                        <div class="form-group">
+                            <input type="number" placeholder="1" step="1" class="form-control" id="ucon-sequence"/>
+                        </div>
+
                         <label>Title: </label>
                         <div class="form-group">
                             <input type="text" placeholder="Title" class="form-control" id="ucon-title"/>
                             <input type="hidden" id="ucon_id"/>
                         </div>
-                    </div>
-                    <div class="modal-body">
+                    
                         <label>Content: </label>
                         <textarea class="form-control" id="ucon-desc" rows="3" placeholder="Content..."></textarea>
-                    </div>
-                    <div class="modal-body">
+                   
                         <label>Price: </label>
                         <div class="form-group">
                             <input type="number" step="0.01" placeholder="27.5" class="form-control" id="ucon-num"/>
                         </div>
-                    </div>
-                    <div class="modal-body">
+                    
                         <label>Size: </label>
                         <div class="form-group">
                             <input type="text" placeholder="17.5" class="form-control" id="ucon-size"/>
@@ -315,6 +327,7 @@
         // Category
         $(document).on('submit', '.form-cate-create', function(e){
             var category_text = $('.category-text').val();
+            var category_sequence = $('.category-sequence').val();
             var url = '{{route('category.create')}}';
             var page_id = '{{$page_id}}';
 
@@ -330,7 +343,7 @@
                         $('#modal-cate-create').modal('hide');
                         $('.category-text').val('');
                         var id = data['success'];
-                        $('.nav-tabs').append("<li class='nav-item'><a class='nav-link' id='tab-category-"+id+"' data-toggle='tab' href='#category-"+id+"' aria-controls='category-"+id+"' role='tab' aria-selected='false'>"+category_text+"</a><i class='edit-icon-position' data-id="+id+" data-name="+category_text+"><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-edit-2'><path d='M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z'></path></svg></i><i class='remove-icon-position' data-id="+id+"><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-x'><line x1='18' y1='6' x2='6' y2='18'></line><line x1='6' y1='6' x2='18' y2='18'></line></svg></i></li>");
+                        $('.nav-tabs').append("<li class='nav-item'><a class='nav-link' id='tab-category-"+id+"' data-toggle='tab' href='#category-"+id+"' aria-controls='category-"+id+"' role='tab' aria-selected='false'>"+category_text+"</a><i class='edit-icon-position' edit-icon-position"+id+" data-id="+id+" data-sequence="+category_sequence+" data-name="+category_text+"><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-edit-2'><path d='M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z'></path></svg></i><i class='remove-icon-position' data-id="+id+"><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-x'><line x1='18' y1='6' x2='6' y2='18'></line><line x1='6' y1='6' x2='18' y2='18'></line></svg></i></li>");
                         
                         $('.tab-content').append("<div class='tab-pane' id='category-"+id+"' aria-labelledby='tab-category-"+id+"' role='tabpanel'><p><h2 id='content-all-title"+id+"'>"+category_text+"</h2><button type='button' class='btn btn-primary btn-add-content' data-toggle='modal' data-category_id="+id+">Add</button></p><table class='table'><tbody></tbody></table></div>");
                         feather.replace();
@@ -368,8 +381,10 @@
 
         $(document).on('click', '.edit-icon-position', function(e){
             var id = $(this).data('id');
-            var name = $(this).data('name');
+            var name = $(this).attr('data-name');
+            var sequence = $(this).attr('data-sequence');
             $('#u-category').val(name);
+            $('#u-sequence').val(sequence);
             $('#edit-cate-modal').modal('show');
             $('#cate_id').val(id);
             console.log('id------->', id);
@@ -378,6 +393,7 @@
         $('.form-cate-edit').on('submit', function(e){
             console.log('edit--->cate -->');
             var category_text = $('#u-category').val();
+            var category_sequence = $('#u-sequence').val();
             var url = '{{route("category.update")}}';
             var id = $('#cate_id').val();
             $.ajax({
@@ -386,12 +402,14 @@
                 },
                 type: 'post',
                 url: url,
-                data: {name : category_text, id : id},
+                data: {name : category_text, id : id, sequence : category_sequence},
                 success: function(data) {
                     if(data['success']){
                         console.log('success');
                         $('#tab-category-'+id).text(category_text);
                         $('#content-all-title-'+id).text(category_text);
+                        $('#edit-icon-position'+id+'').attr('data-sequence', category_sequence);
+                        $('#edit-icon-position'+id+'').attr('data-name', category_text);
                         $('#edit-cate-modal').modal('hide');
                     }
                     else{
@@ -416,6 +434,7 @@
             var description = $('#con-desc').val();
             var number = $('#con-num').val();
             var size = $('#con-size').val();
+            var sequence = $('#con-sequence').val();
 
             $('.content-modal-close').click();
             
@@ -427,18 +446,19 @@
                 },
                 type: 'post',
                 url: url,
-                data: {title : title, category_id : category_id, description : description, number : number, size : size},
+                data: {title : title, category_id : category_id, description : description, number : number, size : size, sequence: sequence},
                 success: function(data) {
                     if(data['success']){
                         var id = data['success'];
 
-                        $("#category-"+category_id+" .table").append("<tbody class='content-tpage"+category_id+"'><tr><td><h4 id='content-title-"+id+"'>"+title+"</h4><p id='content-desc-"+id+"'>"+description+"</p></td><td id='content-num-"+id+"'>"+number+"</td><td id='content-size-"+id+"'>"+size+"</td><td><i class='edit-content-position' id='edit-content-position"+id+"' data-id='"+id+"' data-title='"+title+"' data-description='"+description+"' data-number='"+number+"'  data-size='"+size+"'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-edit-2'><path d='M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z'></path></svg></i><i class='remove-content-position ml-1' data-id='"+id+"'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-x'><line x1='18' y1='6' x2='6' y2='18'></line><line x1='6' y1='6' x2='18' y2='18'></line></svg></i></td></tr></tbody>");
+                        $("#category-"+category_id+" .table").append("<tbody class='content-tpage"+category_id+"'><tr><td><h4 id='content-title-"+id+"'>"+title+"</h4><p id='content-desc-"+id+"'>"+description+"</p></td><td id='content-num-"+id+"'>"+number+"</td><td id='content-size-"+id+"'>"+size+"</td><td><i class='edit-content-position' id='edit-content-position"+id+"' data-id='"+id+"' data-title='"+title+"' data-sequence='"+sequence+"' data-description='"+description+"' data-number='"+number+"'  data-size='"+size+"'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-edit-2'><path d='M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z'></path></svg></i><i class='remove-content-position ml-1' data-id='"+id+"'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-x'><line x1='18' y1='6' x2='6' y2='18'></line><line x1='6' y1='6' x2='18' y2='18'></line></svg></i></td></tr></tbody>");
                         feather.replace();
                         $('#cate_con_id').val('');
                         $('#con-title').val('');
                         $('#con-desc').val('');
                         $('#con-num').val('');
                         $('#con-size').val('');
+                        $('#con-sequence').val('');
                                       
                     }
                     else{
@@ -475,12 +495,14 @@
             var description = $(this).attr('data-description');
             var number = $(this).attr('data-number');
             var size = $(this).attr('data-size');
+            var sequence = $(this).attr('data-sequence');
             console.log('size', size);
             $('#ucon-title').val(title);
             $('#ucon-desc').val(description);
             $('#ucon-num').val(number);
             $('#ucon-size').val(size);
             $('#ucon_id').val(id);
+            $('#ucon-sequence').val(sequence);
 
             $('#edit-content-modal').modal('show');
 
@@ -491,6 +513,7 @@
             var udescription = $('#ucon-desc').val();
             var unumber = $('#ucon-num').val();
             var usize = $('#ucon-size').val();
+            var usequence = $('#ucon-sequence').val();
             var id = $('#ucon_id').val();
             
             var url = '{{route("content.update")}}';         
@@ -501,7 +524,7 @@
                 },
                 type: 'post',
                 url: url,
-                data: {title : utitle, id : id, description : udescription, number : unumber, size : usize},
+                data: {title : utitle, id : id, description : udescription, number : unumber, size : usize, sequence : usequence},
                 success: function(data) {
                     if(data['success']){
                         $('#edit-content-modal').modal('hide')
@@ -513,6 +536,7 @@
                         $('#edit-content-position'+id+'').attr('data-description', udescription);
                         $('#edit-content-position'+id+'').attr('data-number', unumber);
                         $('#edit-content-position'+id+'').attr('data-size', usize);
+                        $('#edit-content-position'+id+'').attr('data-sequence', usequence);
                         feather.replace();
                     }
                     else{

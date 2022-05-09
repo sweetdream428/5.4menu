@@ -9,6 +9,6 @@ class Category extends Model
     //
     public function contents()
     {
-        return $this->hasMany(Content::class, 'category_id');
+        return $this->hasMany(Content::class, 'category_id')->orderBy('sequence');
     }
 }

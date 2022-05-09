@@ -24,7 +24,7 @@
         background-repeat: no-repeat;
         background-position: center top;
         height: 1000px;
-        padding: 70px;
+        padding: 70px 70px 0px 70px;
         
     }
     .table td {
@@ -40,6 +40,7 @@
     .templatecontainer, .templatecontainer-sm, .templatecontainer-md, .templatecontainer-lg, .templatecontainer-xl {
         max-width: 1100px;
     }
+    
     .table {
         margin-top: 20px;
         width: 60%;
@@ -104,13 +105,8 @@
         td p, td, .footer-exp{
             font-size: 10px;
         }
-        .table {
-            width: 100%;
-            margin-left: auto;
-            margin-right: auto;
-        }
         .page-view{
-            padding: 70px 0px;
+            padding: 70px 0px 0px 0px;
         }
     }
     @media (max-width: 576px) {
@@ -122,11 +118,6 @@
             line-height: 1.0rem !important;
         }
         
-        .table {
-            width: 100%;
-            margin-left: auto;
-            margin-right: auto;
-        }
     }   
     
 </style>
@@ -213,20 +204,20 @@
         }
         function refreshPdf() {
             var foo_hei = $('.footer-exp').height() + 30;
-            console.log('heee', foo_hei)
+            console.log('foo_hei', foo_hei)
             var j = 0;
             var children = $("#tb_main").find('tr');
-            var max_height = 600;
-            var temp_height = 0;
+            var max_height = 800;
+            var temp_height = 40;
 
             var temp_tbody = document.createElement("tbody");
             $(temp_tbody).addClass('content-tpage');
             
             while(j < children.length ){
-                console.log(children[j], children.eq(j).height())
+                
                 temp_height += children.eq(j).height();
                 
-                if(j == (children.length - 1)){
+                if(j == 0){
                     temp_height += foo_hei;
                 }
                 
@@ -247,9 +238,10 @@
                 }
                 $(children[j]).clone().appendTo(temp_tbody);
                 j++;
+                console.log('temp_height', temp_height);
             }
 
-            console.log(temp_height);
+            // console.log('temp_height', temp_height);
             let page_view_div = document.createElement("div");
             let tbl = document.createElement("table");
             $(tbl).addClass('table');

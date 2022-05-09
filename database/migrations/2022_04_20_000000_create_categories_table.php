@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('page_id');
+            $table->string('sequence')->nullable();
             $table->timestamps();
         });
     }

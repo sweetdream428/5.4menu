@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('number');
             $table->string('size');
+            $table->string('sequence')->nullable();
             $table->timestamps();
         });
     }
