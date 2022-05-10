@@ -60,6 +60,11 @@
                                                 </div>
                                             @endforeach                                        
                                         </div>
+                                        <div class="footer-text-edit w-50 m-auto">
+                                            @foreach ($pages as $page)
+                                                <textarea class="form-control" id="footer-text" rows="3" placeholder="text...">{{$page->footer_text}}</textarea>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
                             </div>

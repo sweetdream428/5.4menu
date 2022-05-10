@@ -142,19 +142,19 @@
                         <div class="modal-body">
                             <label>Name: </label>
                             <div class="form-group">
-                                <input type="text" placeholder="name" class="form-control" id="res-name"/>
+                                <input type="text" placeholder="name" class="form-control" id="res-uname"/>
                             </div>
                         </div>
                         <div class="modal-body">
                             <label>Address: </label>
                             <div class="form-group">
-                                <input type="text" placeholder="address" class="form-control" id="res-addr"/>
+                                <input type="text" placeholder="address" class="form-control" id="res-uaddr"/>
                             </div>
                         </div>
                         <div class="modal-body">
                             <label>Menu Name: </label>
                             <div class="form-group">
-                                <select class="menu_name form-control" id="menu_id">
+                                <select class="menu_name form-control" id="umenu_id">
                                     @foreach ($pages as $page)
                                         <option value="{{$page->id}}">{{$page->pagename}}</option>
                                     @endforeach
@@ -186,7 +186,14 @@
         });
 
         $(document).on('click', '.res-edit-btn', function(e){
-        
+            var id = $(this).data('id');
+            var name = $(this).data('name');
+            var address = $(this).data('address');
+            var menu_id = $(this).data('menu_id');
+            $('#res-uname').val(name);
+            $('#res-uaddr').val(address);
+            $('#umenu_id').val(menu_id);
+            $('#modal-res-update').modal('show');
         });
     </script>
 </body>
