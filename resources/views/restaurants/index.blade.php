@@ -63,17 +63,17 @@
                                        <tbody>
                                             @foreach ($restaurants as $restaurant)
                                                 <tr>
-                                                    <td>{{$restaurant->name}}</td>
-                                                    <td>{{$restaurant->address}}</td>
-                                                    <td>{{$restaurant->menu_id}}</td>
+                                                    <td id="res-name{{$restaurant->id}}">{{$restaurant->name}}</td>
+                                                    <td id="res-addr{{$restaurant->id}}">{{$restaurant->address}}</td>
+                                                    <td id="res-menu{{$restaurant->id}}">{{$restaurant->menu_id}}</td>
                                                     <td>
-                                                        <a class="btn res-edit-btn" data-id="{{$restaurant->id}}" data-name="{{$restaurant->name}}" data-address="{{$restaurant->address}}" data-menu_id="{{$restaurant->menu_id}}">
+                                                        <a class="btn res-edit-btn" id="res-edit-btn{{$restaurant->id}}" data-id="{{$restaurant->id}}" data-name="{{$restaurant->name}}" data-address="{{$restaurant->address}}" data-menu_id="{{$restaurant->menu_id}}">
                                                             <i data-feather='edit'></i>
                                                         </a>
                                                         <a class="res-remove-btn btn" data-id="{{$restaurant->id}}">
                                                             <i data-feather='delete'></i>
                                                         </a>
-                                                        <a  target="blank" class="menu-view-btn btn" data-id="{{$restaurant->id}}">
+                                                        <a href="/restaurant/{{$restaurant->id}}" target="blank" class="menu-view-btn btn" data-id="{{$restaurant->id}}">
                                                             <i data-feather='eye'></i>
                                                         </a>
                                                     </td>
@@ -105,14 +105,10 @@
                             <div class="form-group">
                                 <input type="text" placeholder="name" class="form-control" id="res-name"/>
                             </div>
-                        </div>
-                        <div class="modal-body">
                             <label>Address: </label>
                             <div class="form-group">
                                 <input type="text" placeholder="address" class="form-control" id="res-addr"/>
                             </div>
-                        </div>
-                        <div class="modal-body">
                             <label>Menu Name: </label>
                             <div class="form-group">
                                 <select class="menu_name form-control" id="menu_id">
@@ -143,15 +139,12 @@
                             <label>Name: </label>
                             <div class="form-group">
                                 <input type="text" placeholder="name" class="form-control" id="res-uname"/>
+                                <input type="hidden" id="res-uid">
                             </div>
-                        </div>
-                        <div class="modal-body">
                             <label>Address: </label>
                             <div class="form-group">
                                 <input type="text" placeholder="address" class="form-control" id="res-uaddr"/>
                             </div>
-                        </div>
-                        <div class="modal-body">
                             <label>Menu Name: </label>
                             <div class="form-group">
                                 <select class="menu_name form-control" id="umenu_id">
@@ -162,7 +155,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button class="btn btn-primary">Save</button>
+                            <button class="btn btn-primary btn-update-save">Save</button>
                         </div>
                     </form>
                 </div>
@@ -186,14 +179,45 @@
         });
 
         $(document).on('click', '.res-edit-btn', function(e){
-            var id = $(this).data('id');
-            var name = $(this).data('name');
-            var address = $(this).data('address');
-            var menu_id = $(this).data('menu_id');
+            var id = $(this).attr('data-id');
+            var name = $(this).attr('data-name');
+            var address = $(this).attr('data-address');
+            var menu_id = $(this).attr('data-menu_id');
+            $('#res-uid').val(id);
             $('#res-uname').val(name);
             $('#res-uaddr').val(address);
             $('#umenu_id').val(menu_id);
             $('#modal-res-update').modal('show');
+        });
+
+        $(document).on('click', '.btn-update-save', function(e){
+            var id =  $('#res-uid').val();
+            var name = $('#res-uname').val();
+            var address = $('#res-uaddr').val();
+            var menu_id = $('#umenu_id').val();
+            var url = '{{route("restaurant.update")}}';
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                data: {id : id, name : name, address : address, menu_id : menu_id},
+                url: url,
+                success: function(data) {
+                    if(data['success']){
+                        $('#res-name'+id).text(name);
+                        $('#res-addr'+id).text(address);
+                        $('#res-menu'+id).text(menu_id);
+                        $('#res-edit-btn'+id).attr('data-name', name);
+                        $('#res-edit-btn'+id).attr('data-address', address);
+                        $('#res-edit-btn'+id).attr('data-menu_id', menu_id);
+                        $('#modal-res-update').modal('hide');
+                        toastr["success"]("Changed Successfully.");
+                    }
+                    else{
+                    }
+                }
+            });
         });
     </script>
 </body>

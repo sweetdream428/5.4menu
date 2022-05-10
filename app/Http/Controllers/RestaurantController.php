@@ -6,6 +6,8 @@ use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use App\Models\Restaurant;
 use App\Models\Page;
+use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +19,7 @@ class RestaurantController extends Controller
         $restaurants = Restaurant::where('owner', Auth::user()->id)->get();
         $pages = Page::where('owner', Auth::user()->id)->get();
         return view('restaurants.index')->with('restaurants', $restaurants)->with('pages', $pages);
-    }  
+    } 
     
     public function create(Request $request)
     {
@@ -47,7 +49,7 @@ class RestaurantController extends Controller
                 'menu_id' => $request->menu_id ? $request->menu_id : ''
             ]);
 
-            return response()->json(['success'=>$id, 'name'=>$request->name, 'address'=>$request->address, 'menu_id'=>$request->menu_id]);
+            return response()->json(['success'=>true]);
         }
         catch(Exception $e){
             return response()->json(['success'=>false]);
@@ -62,5 +64,20 @@ class RestaurantController extends Controller
         catch(Exception $e){
             return response()->json(['success'=>false]);
         }
+    }
+
+    public function view($id)
+    {
+        $restaurants = Restaurant::where('id', $id)->get();
+        $menu_id = $restaurants[0]->menu_id;
+        $pages = Page::where('id', $menu_id)->get();
+        foreach($pages as $page){
+            $pagename = $page->name;
+            $categories = Category::where('page_id', $id)->orderBy('sequence')->get();
+            $firstids = DB::table('categories')->where('page_id', $id)->orderBy('id')->get('id')->count() ? DB::table('categories')->where('page_id', $id)->orderBy('sequence')->get('id') : '';
+            $firstid = $firstids ? $firstids[0]->id : '';
+            return view('mainpages.'.$pagename.'.index')->with('pages', $pages)->with('categories', $categories)->with('firstid', $firstid);
+        }
+        
     }
 }
