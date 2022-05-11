@@ -31,7 +31,18 @@ class TimeController extends Controller
         $sundays = Sunday::where('content_id', $id)->get();
         $createId = $id;
         return view('time.index')->with('contents', $contents)->with('mondays', $mondays)->with('tuesdays', $tuesdays)->with('tuesdays', $tuesdays)->with('wednesdays', $wednesdays)->with('thursdays', $thursdays)->with('fridays', $fridays)->with('saturdays', $saturdays)->with('sundays', $sundays)->with('createId', $createId);
-    } 
+    }
+
+    public function timeStatus(Request $request){
+        try{
+            Content::where('id', $request->id)->update([
+                $request->week => $request->status,
+            ]);
+            return response()->json(['success'=>true]);
+        }catch (Exception $e) {
+            return response()->json(['success'=>$e]);
+        }
+    }
     
     
 }

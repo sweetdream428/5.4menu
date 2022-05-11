@@ -3,7 +3,171 @@
 @section('title', 'Restaurant')
 
 <style>
-    
+    .switch {
+        position: relative;
+        display: flex;
+        width: 60px;
+        height: 34px;
+    }
+
+    .switch input { 
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked + .slider {
+        background-color: #2196F3;
+    }
+
+    input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+
+
+    /* TIME */
+
+    :root{
+        --main-color: #1a535c;
+        --secondary-color: #4ecdc4;
+        --white-color: #f7fff7;
+        --main-accent-color: #ff6b6b;
+        --secondary-accent-color: #ffe66d;
+        --dark-color: #2D232E;
+    }
+
+       
+    h3, h4{
+        color: var(--main-color)
+    }
+
+    h6{
+        color: var(--secondary-color);
+    }
+
+    .day-txt{
+        display: inline-block;
+        transition: all ease-out 0.3s;de
+    }
+
+    .row:hover .day-txt{
+        transform: translateX(5px);
+        text-shadow: 0 0 0;
+    }
+
+    .tp-start-time,
+    .tp-end-time{
+        color: var(--main-color);
+        cursor: pointer;
+        display: inline-block;
+        transition: all ease-out 0.3s;
+    }
+
+    .tp-start-time:hover,
+    .tp-end-time:hover{
+        transform: scale(1.2);
+        text-shadow: 0 0 0 var(--main-color);
+        
+    }
+
+
+        /* timePicker.css */
+    #tp-modal .modal-footer{
+        border: none;
+    }
+
+    #tp-modal .modal-header{
+        border: none;
+    }
+
+    #tp-time-cont{
+        display: flex;
+        text-align: center;
+        background: white;
+        position: relative;
+        align-items: stretch;
+    }
+
+    #tp-colon{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #tp-time-cont button{
+        border: none;
+        background: transparent;
+        height: auto;
+        padding: 0.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        outline: none!important;
+        transition: all ease-out 0.3s;
+    }
+
+    #tp-hour-cont,
+    #tp-minutes-cont{
+        flex-grow: 1;
+    }
+
+    #tp-time-cont button:hover{
+        transform: scale(1.3);
+        color: var(--main-color);
+    }
+
+    .tp-value{
+        font-size: 2rem;
+        line-height: 2rem;
+    }
+
+    #tp-set-btn{
+        background: var(--main-color);
+        border-color: var(--main-color);
+    }
+    .flatpickr-monday, .flatpickr-tuesday, .flatpickr-wednesday, .flatpickr-thursday, .flatpickr-friday, .flatpickr-saturday, .flatpickr-sunday{
+        display: none;
+    }
 </style>
 <body class="vertical-layout vertical-menu-modern  navbar-floating footer-static  " data-open="click"
     data-menu="vertical-menu-modern" data-col="">
@@ -110,7 +274,7 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="custom-control custom-control-primary custom-switch">
-                                                            <input type="checkbox" class="custom-control-input" id="mon" {{$content->mon == 1 ? 'checked' : ''}}/>
+                                                            <input type="checkbox" class="custom-control-input monday-status" id="mon" {{$content->mon == 1 ? 'checked' : ''}}/>
                                                             <label class="custom-control-label" for="mon"></label>
                                                         </div>
                                                     </div>
@@ -154,7 +318,7 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="custom-control custom-control-primary custom-switch">
-                                                            <input type="checkbox" class="custom-control-input" id="tue" {{$content->tue == 1 ? 'checked' : ''}}/>
+                                                            <input type="checkbox" class="custom-control-input tuesday-status" id="tue" {{$content->tue == 1 ? 'checked' : ''}}/>
                                                             <label class="custom-control-label" for="tue"></label>
                                                         </div>
                                                     </div>
@@ -197,7 +361,7 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="custom-control custom-control-primary custom-switch">
-                                                            <input type="checkbox" class="custom-control-input" id="wed" {{$content->wed == 1 ? 'checked' : ''}}/>
+                                                            <input type="checkbox" class="custom-control-input wednesday-status" id="wed" {{$content->wed == 1 ? 'checked' : ''}}/>
                                                             <label class="custom-control-label" for="wed"></label>
                                                         </div>
                                                     </div>
@@ -240,7 +404,7 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="custom-control custom-control-primary custom-switch">
-                                                            <input type="checkbox" class="custom-control-input" id="thu" {{$content->thu == 1 ? 'checked' : ''}}/>
+                                                            <input type="checkbox" class="custom-control-input thursday-status" id="thu" {{$content->thu == 1 ? 'checked' : ''}}/>
                                                             <label class="custom-control-label" for="thu"></label>
                                                         </div>
                                                     </div>
@@ -283,7 +447,7 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="custom-control custom-control-primary custom-switch">
-                                                            <input type="checkbox" class="custom-control-input" id="fri" {{$content->fri == 1 ? 'checked' : ''}}/>
+                                                            <input type="checkbox" class="custom-control-input friday-status" id="fri" {{$content->fri == 1 ? 'checked' : ''}}/>
                                                             <label class="custom-control-label" for="fri"></label>
                                                         </div>
                                                     </div>
@@ -326,7 +490,7 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="custom-control custom-control-primary custom-switch">
-                                                            <input type="checkbox" class="custom-control-input" id="sat" {{$content->sat == 1 ? 'checked' : ''}}/>
+                                                            <input type="checkbox" class="custom-control-input saturday-status" id="sat" {{$content->sat == 1 ? 'checked' : ''}}/>
                                                             <label class="custom-control-label" for="sat"></label>
                                                         </div>
                                                     </div>
@@ -432,7 +596,7 @@
     
     <!-- END: Page JS-->
     <script>
-          $(function(){
+        $(function(){
             var mon = 0, tue = 0, wed = 0, thu = 0, fri = 0, sat = 0, sun = 0;
             $('.add-monday').on('click', function(e){
                 $('#service-vertical-monday').append('<div class="row mt-2 tp-day-cont d-flex align-items-center"><div class="col-md-4 col-12"><button type="button" class="btn btn-danger remove-monday" data-id='+ mon +'>Remove</button><button type="button" class="btn btn-success save-monday ml-2" data-id='+ mon +'>Save</button></div><div class="col-md-2 col-6"><span class="tp-start-time mon-start-time" data-id='+ mon +'>00:00</span></div><div class="col-md-2 col-6"><span class="tp-end-time mon-end-time" data-id='+ mon +'>00:00</span></div><div class="col-md-2 col-6"><input type="checkbox" class="mon_check" data-id='+ mon +' /></div><div class="col-md-2 col-6"><input type="text" class="form-control flatpickr-monday" placeholder="YYYY-MM-DD" data-id='+ mon +' /></div></div>');
@@ -1159,7 +1323,7 @@
         }
 
         function StatusFun(id, week, status){
-            var changeurl = '/datatrans-week-status'
+            var changeurl = '/time-status'
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
