@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MenupageController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\TimeController;
 
 /*
 |--------------------------------------------------------------------------
