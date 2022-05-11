@@ -73,8 +73,9 @@ class RestaurantController extends Controller
         $pages = Page::where('id', $menu_id)->get();
         foreach($pages as $page){
             $pagename = $page->name;
-            $categories = Category::where('page_id', $id)->orderBy('sequence')->get();
-            $firstids = DB::table('categories')->where('page_id', $id)->orderBy('id')->get('id')->count() ? DB::table('categories')->where('page_id', $id)->orderBy('sequence')->get('id') : '';
+            $pid = $page->id;
+            $categories = Category::where('page_id', $pid)->orderBy('sequence')->get();
+            $firstids = DB::table('categories')->where('page_id', $pid)->orderBy('id')->get('id')->count() ? DB::table('categories')->where('page_id', $pid)->orderBy('sequence')->get('id') : '';
             $firstid = $firstids ? $firstids[0]->id : '';
             return view('mainpages.'.$pagename.'.index')->with('pages', $pages)->with('categories', $categories)->with('firstid', $firstid);
         }

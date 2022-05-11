@@ -227,11 +227,11 @@
 
                         <label>Price: </label>
                         <div class="form-group">
-                            <input type="number" step="0.01" placeholder="27.5" class="form-control" id="con-num"/>
+                            <input type="text" placeholder="27.5$" class="form-control" id="con-num"/>
                         </div>
                         <label>Size: </label>
                         <div class="form-group">
-                            <input type="text" placeholder="27.5" class="form-control" id="con-size"/>
+                            <input type="text" placeholder="27.5L" class="form-control" id="con-size"/>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -301,12 +301,12 @@
                    
                         <label>Price: </label>
                         <div class="form-group">
-                            <input type="number" step="0.01" placeholder="27.5" class="form-control" id="ucon-num"/>
+                            <input type="text" placeholder="27.5$" class="form-control" id="ucon-num"/>
                         </div>
                     
                         <label>Size: </label>
                         <div class="form-group">
-                            <input type="text" placeholder="17.5" class="form-control" id="ucon-size"/>
+                            <input type="text" placeholder="17.5L" class="form-control" id="ucon-size"/>
                         </div>
                     </div>
                     <div class="modal-footer">
