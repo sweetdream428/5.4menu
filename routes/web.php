@@ -59,6 +59,7 @@ Route::middleware('auth')->group(function () {
     Route::post('res-update', [RestaurantController::class, 'update'])->name('restaurant.update');
     Route::post('res-remove/{id}', [RestaurantController::class, 'remove'])->name('restaurant.remove');
 
+    Route::get('time/{contentid}', [TimeController::class, 'index'])->name('time.index');
 });
 
 //clear cache
