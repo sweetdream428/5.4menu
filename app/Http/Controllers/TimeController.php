@@ -5,6 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use App\Models\Content;
+use App\Models\Monday;
+use App\Models\Tuesday;
+use App\Models\Wednesday;
+use App\Models\Thursday;
+use App\Models\Friday;
+use App\Models\Saturday;
+use App\Models\Sunday;
 use Illuminate\Support\Facades\DB;
 use Exception;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +22,15 @@ class TimeController extends Controller
     public function index($id)
     {
         $contents = Content::where('id', $id)->get();
-        return view('time.index')->with('contents', $contents);
+        $mondays = Monday::where('content_id', $id)->get();
+        $tuesdays = Tuesday::where('content_id', $id)->get();
+        $wednesdays = Wednesday::where('content_id', $id)->get();
+        $thursdays = Thursday::where('content_id', $id)->get();
+        $fridays = Friday::where('content_id', $id)->get();
+        $saturdays = Saturday::where('content_id', $id)->get();
+        $sundays = Sunday::where('content_id', $id)->get();
+        $createId = $id;
+        return view('time.index')->with('contents', $contents)->with('mondays', $mondays)->with('tuesdays', $tuesdays)->with('tuesdays', $tuesdays)->with('wednesdays', $wednesdays)->with('thursdays', $thursdays)->with('fridays', $fridays)->with('saturdays', $saturdays)->with('sundays', $sundays)->with('createId', $createId);
     } 
     
     

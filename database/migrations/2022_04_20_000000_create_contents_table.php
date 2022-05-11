@@ -21,6 +21,13 @@ return new class extends Migration
             $table->string('number');
             $table->string('size');
             $table->integer('sequence')->default(9999)->nullable();
+            $table->string('mon')->nullable();
+            $table->string('tue')->nullable();
+            $table->string('wed')->nullable();
+            $table->string('thu')->nullable();
+            $table->string('fri')->nullable();
+            $table->string('sat')->nullable();
+            $table->string('sun')->nullable();
             $table->timestamps();
         });
     }
