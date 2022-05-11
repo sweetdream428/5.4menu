@@ -13,6 +13,12 @@
 <script src="{{ asset('/app-assets/vendors/js/tables/datatable/responsive.bootstrap4.js')}}"></script>
 <script src="{{ asset('/app-assets/vendors/js/extensions/sweetalert2.all.min.js')}}"></script>
 <script src="{{ asset('/app-assets/vendors/js/extensions/polyfill.min.js')}}"></script>
+
+<script src="{{ asset('/app-assets/vendors/js/pickers/pickadate/picker.js')}}"></script>
+<script src="{{ asset('/app-assets/vendors/js/pickers/pickadate/picker.date.js')}}"></script>
+<script src="{{ asset('/app-assets/vendors/js/pickers/pickadate/picker.time.js')}}"></script>
+<script src="{{ asset('/app-assets/vendors/js/pickers/pickadate/legacy.js')}}"></script>
+<script src="{{ asset('/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js')}}"></script>
 <!-- END: Page Vendor JS-->
 
 <!-- JS -->
@@ -29,7 +35,7 @@
 <!-- END: Page JS-->
 
 <script>
-var isRtl = $('html').attr('data-textdirection') === 'rtl'
+var isRtl = $('html').attr('data-textdirection') === 'rtl';
 // Set the options that I want
 toastr.options = {
     "closeButton": true,

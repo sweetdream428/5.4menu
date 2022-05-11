@@ -630,6 +630,7 @@
 
         $(document).on('click', '.mon_check', function(){
             var id = $(this).attr('data-id').toString();
+            console.log('data-id----->', id);
             $(this).is(':checked') ? $('.flatpickr-monday[data-id=' + id + ']').css('display', 'inline') : $('.flatpickr-monday[data-id=' + id + ']').css('display', 'none');
 
             $('.flatpickr-monday[data-id=' + id + ']').flatpickr({
@@ -1336,7 +1337,7 @@
                         toastr["success"]("Changed successfully.");
                     }
                     else {
-                        console.log('error');
+                        toastr["error"]("ERROR");
                     }
                 }
             
