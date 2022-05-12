@@ -44,5 +44,45 @@ class TimeController extends Controller
         }
     }
     
+    public function timeCreate(Request $request){
+        try{
+            DB::table($request->weekname)->insert([
+                'start_time' => $request->start_time,
+                'end_time' => $request->end_time,
+                'date_check' => $request->date_check,
+                'selectdata' => $request->selectdata,
+                'content_id' => $request->service_id
+            ]);
+            $id = DB::getPdo()->lastInsertId();
+            return response()->json(['success'=>$id]);
+        }catch (Exception $e) {
+            return response()->json(['success'=>false]);
+        }
+    }
+    Public function TimeRemove(Request $request){
+        try{
+            DB::table($request->weekname)->where('id', $request->real_id)->delete();
+            return response()->json(['success'=>true]);
+        }catch (Exception $e) {
+            return response()->json(['success'=>false]);
+        }
+    }
+
+    public function timeUpdate(Request $request){
+        
+        try{
+            DB::table($request->weekname)->where('id', $request->real_id)->update([
+                'start_time' => $request->start_time,
+                'end_time' => $request->end_time,
+                'date_check' => $request->date_check,
+                'selectdata' => $request->selectdata,
+                'content_id' => $request->service_id
+            ]);
+            return response()->json(['success'=>true]);
+        }catch (Exception $e) {
+            return response()->json(['success'=>false]);
+        }
+    }
+    
     
 }

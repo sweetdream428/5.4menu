@@ -602,7 +602,7 @@
 
         $(document).on('click', '.time-content-page', function(e){
             var id = $(this).attr('data-id');
-            window.location.href = '/time/'+id;
+            window.open('/time/'+id, '_blank');
         });
     </script>
 </body>

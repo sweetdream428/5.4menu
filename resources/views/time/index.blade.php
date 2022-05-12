@@ -760,7 +760,7 @@
             var week = 'monday';
             var short_week = 'mon';
             
-            CreateUpdate(id, start_time, end_time, date_check, selectdata, service_id, service_id, weekname, week, short_week);
+            CreateUpdate(id, start_time, end_time, date_check, selectdata, service_id, weekname, week, short_week);
             
         });
 
@@ -777,7 +777,7 @@
             var short_week = 'tue';
 
             
-            CreateUpdate(id, start_time, end_time, date_check, selectdata, service_id, service_id, weekname, week, short_week);
+            CreateUpdate(id, start_time, end_time, date_check, selectdata, service_id, weekname, week, short_week);
             
         });
 
@@ -794,7 +794,7 @@
             var short_week = 'wed';
 
             
-            CreateUpdate(id, start_time, end_time, date_check, selectdata, service_id, service_id, weekname, week, short_week);
+            CreateUpdate(id, start_time, end_time, date_check, selectdata, service_id, weekname, week, short_week);
             
         });
 
@@ -811,7 +811,7 @@
             var short_week = 'thu';
 
             
-            CreateUpdate(id, start_time, end_time, date_check, selectdata, service_id, service_id, weekname, week, short_week);
+            CreateUpdate(id, start_time, end_time, date_check, selectdata, service_id, weekname, week, short_week);
             
         });
 
@@ -828,7 +828,7 @@
             var short_week = 'fri';
 
             
-            CreateUpdate(id, start_time, end_time, date_check, selectdata, service_id, service_id, weekname, week, short_week);
+            CreateUpdate(id, start_time, end_time, date_check, selectdata, service_id, weekname, week, short_week);
             
         });
 
@@ -845,7 +845,7 @@
             var short_week = 'sat';
 
             
-            CreateUpdate(id, start_time, end_time, date_check, selectdata, service_id, service_id, weekname, week, short_week);
+            CreateUpdate(id, start_time, end_time, date_check, selectdata, service_id, weekname, week, short_week);
             
         });
 
@@ -861,7 +861,7 @@
             var week = 'sunday';
             var short_week = 'sun';
             
-            CreateUpdate(id, start_time, end_time, date_check, selectdata, service_id, service_id, weekname, week, short_week);
+            CreateUpdate(id, start_time, end_time, date_check, selectdata, service_id, weekname, week, short_week);
             
         });
 
@@ -1245,10 +1245,10 @@
             return hour + ":" + minutes;
         }
 
-        function CreateUpdate(id, start_time, end_time, date_check, selectdata, service_id, service_id, weekname, week, short_week){
+        function CreateUpdate(id, start_time, end_time, date_check, selectdata, service_id, weekname, week, short_week){
             // createId
-            var createurl = '/datatrans-week-create';
-            var updateurl = '/datatrans-week-update';
+            var createurl = '/time-create';
+            var updateurl = '/time-update';
            
             if(start_time != end_time){
                 
@@ -1304,7 +1304,7 @@
         }
         
         function RemoveFun(weekname, real_id){
-            var remove_url = '/datatrans-weel-remove';
+            var remove_url = '/time-remove';
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

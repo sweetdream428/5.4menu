@@ -62,6 +62,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('time/{contentid}', [TimeController::class, 'index'])->name('time.index');
     Route::post('time-status', [TimeController::class, 'timeStatus'])->name('time.status');
+    Route::post('time-create', [TimeController::class, 'timeCreate'])->name('time.create');
+    Route::post('time-remove', [TimeController::class, 'timeRemove'])->name('time.remove');
+    Route::post('time-update', [TimeController::class, 'timeUpdate'])->name('time.update');
 });
 
 //clear cache
