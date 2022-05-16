@@ -56,7 +56,7 @@ class TimeController extends Controller
             $id = DB::getPdo()->lastInsertId();
             return response()->json(['success'=>$id]);
         }catch (Exception $e) {
-            return response()->json(['success'=>false]);
+            return response()->json(['success'=>$e]);
         }
     }
     Public function TimeRemove(Request $request){

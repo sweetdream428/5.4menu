@@ -573,12 +573,6 @@
                                 
                             </div>
                             <!--/ right content section -->
-
-                            <div class="col-12 d-flex justify-content-between">
-                                <button type="button" class="btn btn-danger btn-service-cancel">Cancel</button>
-                                <button type="button" class="btn btn-info btn-service-save">Save</button>
-                            </div>
-
                         </div>
                     </section>
                 @endforeach
@@ -754,7 +748,7 @@
             var start_time = $('.mon-start-time[data-id=' + id + ']').text();
             var end_time = $('.mon-end-time[data-id=' + id + ']').text();
             var date_check = $('.mon_check[data-id=' + id + ']').is(':checked') ? 1 : 0;
-            var selectdata = $('.flatpickr-monday[data-id=' + id + ']').val() ? $('.flatpickr-monday[data-id=' + id + ']').val() : '0';
+            var selectdata = $('.flatpickr-monday[data-id=' + id + ']').val() ? $('.flatpickr-monday[data-id=' + id + ']').val() : '2022-08-09';
             var service_id = '{{$createId}}';
             var weekname = 'mondays';
             var week = 'monday';
@@ -770,7 +764,7 @@
             var start_time = $('.tue-start-time[data-id=' + id + ']').text();
             var end_time = $('.tue-end-time[data-id=' + id + ']').text();
             var date_check = $('.tue_check[data-id=' + id + ']').is(':checked') ? 1 : 0;
-            var selectdata = $('.flatpickr-tuesday[data-id=' + id + ']').val() ? $('.flatpickr-tuesday[data-id=' + id + ']').val() : '0';
+            var selectdata = $('.flatpickr-tuesday[data-id=' + id + ']').val() ? $('.flatpickr-tuesday[data-id=' + id + ']').val() : '2022-08-09';
             var service_id = '{{$createId}}';
             var weekname = 'tuesdays';
             var week = 'tuesday';
@@ -787,7 +781,7 @@
             var start_time = $('.wed-start-time[data-id=' + id + ']').text();
             var end_time = $('.wed-end-time[data-id=' + id + ']').text();
             var date_check = $('.wed_check[data-id=' + id + ']').is(':checked') ? 1 : 0;
-            var selectdata = $('.flatpickr-wednesday[data-id=' + id + ']').val() ? $('.flatpickr-wednesday[data-id=' + id + ']').val() : '0';
+            var selectdata = $('.flatpickr-wednesday[data-id=' + id + ']').val() ? $('.flatpickr-wednesday[data-id=' + id + ']').val() : '2022-08-09';
             var service_id = '{{$createId}}';
             var weekname = 'wednesdays';
             var week = 'wednesday';
@@ -804,7 +798,7 @@
             var start_time = $('.thu-start-time[data-id=' + id + ']').text();
             var end_time = $('.thu-end-time[data-id=' + id + ']').text();
             var date_check = $('.thu_check[data-id=' + id + ']').is(':checked') ? 1 : 0;
-            var selectdata = $('.flatpickr-thursday[data-id=' + id + ']').val() ? $('.flatpickr-thursday[data-id=' + id + ']').val() : '0';
+            var selectdata = $('.flatpickr-thursday[data-id=' + id + ']').val() ? $('.flatpickr-thursday[data-id=' + id + ']').val() : '2022-08-09';
             var service_id = '{{$createId}}';
             var weekname = 'thursdays';
             var week = 'thursday';
@@ -821,7 +815,7 @@
             var start_time = $('.fri-start-time[data-id=' + id + ']').text();
             var end_time = $('.fri-end-time[data-id=' + id + ']').text();
             var date_check = $('.fri_check[data-id=' + id + ']').is(':checked') ? 1 : 0;
-            var selectdata = $('.flatpickr-friday[data-id=' + id + ']').val() ? $('.flatpickr-friday[data-id=' + id + ']').val() : '0';
+            var selectdata = $('.flatpickr-friday[data-id=' + id + ']').val() ? $('.flatpickr-friday[data-id=' + id + ']').val() : '2022-08-09';
             var service_id = '{{$createId}}';
             var weekname = 'fridays';
             var week = 'friday';
@@ -838,7 +832,7 @@
             var start_time = $('.sat-start-time[data-id=' + id + ']').text();
             var end_time = $('.sat-end-time[data-id=' + id + ']').text();
             var date_check = $('.sat_check[data-id=' + id + ']').is(':checked') ? 1 : 0;
-            var selectdata = $('.flatpickr-saturday[data-id=' + id + ']').val() ? $('.flatpickr-saturday[data-id=' + id + ']').val() : '0';
+            var selectdata = $('.flatpickr-saturday[data-id=' + id + ']').val() ? $('.flatpickr-saturday[data-id=' + id + ']').val() : '2022-08-09';
             var service_id = '{{$createId}}';
             var weekname = 'saturdays';
             var week = 'saturday';
@@ -855,7 +849,7 @@
             var start_time = $('.sun-start-time[data-id=' + id + ']').text();
             var end_time = $('.sun-end-time[data-id=' + id + ']').text();
             var date_check = $('.sun_check[data-id=' + id + ']').is(':checked') ? 1 : 0;
-            var selectdata = $('.flatpickr-sunday[data-id=' + id + ']').val() ? $('.flatpickr-sunday[data-id=' + id + ']').val() : '0';
+            var selectdata = $('.flatpickr-sunday[data-id=' + id + ']').val() ? $('.flatpickr-sunday[data-id=' + id + ']').val() : '2022-08-09';
             var service_id = '{{$createId}}';
             var weekname = 'sundays';
             var week = 'sunday';
@@ -1267,7 +1261,7 @@
                                 toastr["success"]("Changed successfully.");
                             }
                             else {
-                                console.log('error');
+                                toastr["error"]("Error");
                             }
                         }
                     });
@@ -1295,7 +1289,7 @@
 
                             }
                             else {
-                                console.log('error');
+                                toastr["error"]("Error");
                             }
                         }
                     });
@@ -1317,7 +1311,7 @@
                         
                     }
                     else {
-                        console.log('error');
+                        toastr["error"]("Error");
                     }
                 }
             });
@@ -1337,7 +1331,7 @@
                         toastr["success"]("Changed successfully.");
                     }
                     else {
-                        toastr["error"]("ERROR");
+                        toastr["error"]("Error");
                     }
                 }
             
