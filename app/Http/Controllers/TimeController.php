@@ -45,10 +45,14 @@ class TimeController extends Controller
     }
     
     public function timeCreate(Request $request){
+        $start_second = explode(":", $request->start_time)[0] * 3600 + explode(":", $request->start_time)[1] * 60;
+        $end_second = explode(":", $request->end_time)[0] * 3600 + explode(":", $request->end_time)[1] * 60;
         try{
             DB::table($request->weekname)->insert([
                 'start_time' => $request->start_time,
                 'end_time' => $request->end_time,
+                'start_second' => $request->start_second,
+                'end_second' => $request->end_second,
                 'date_check' => $request->date_check,
                 'selectdata' => $request->selectdata,
                 'content_id' => $request->service_id
@@ -69,11 +73,14 @@ class TimeController extends Controller
     }
 
     public function timeUpdate(Request $request){
-        
+        $start_second = explode(":", $request->start_time)[0] * 3600 + explode(":", $request->start_time)[1] * 60;
+        $end_second = explode(":", $request->end_time)[0] * 3600 + explode(":", $request->end_time)[1] * 60;
         try{
             DB::table($request->weekname)->where('id', $request->real_id)->update([
                 'start_time' => $request->start_time,
                 'end_time' => $request->end_time,
+                'start_second' => $request->start_second,
+                'end_second' => $request->end_second,
                 'date_check' => $request->date_check,
                 'selectdata' => $request->selectdata,
                 'content_id' => $request->service_id

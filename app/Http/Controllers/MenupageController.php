@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 use App\Models\Page;
 use App\Models\Category;
 use App\Models\Content;
+use App\Models\Monday;
+use App\Models\Tuesday;
+use App\Models\Wednesday;
+use App\Models\Thursday;
+use App\Models\Friday;
+use App\Models\Saturday;
+use App\Models\Sunday;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -177,9 +184,43 @@ class MenupageController extends Controller
 
     public function categet(Request $request){
         try{
+            $getTime = time();
+            $getWeek = strtolower(date('D', $getTime));
+            if($getWeek == 'mon'){
+                $modalName = 'Monday';
+                $weekPossble = Monday::whereDate('start_time', '<=', date("H:i:s"))->get();
+            }
+            else if($getWeek == 'tue'){
+                $modalName = 'Tuesday';
+                $weekPossble = Tuesday::whereDate('start_time', '<=', date("H:i:s"))->get();
+            }
+            else if($getWeek == 'wed'){
+                $modalName = 'Wednesday';
+                $weekPossble = Wednesday::whereDate('start_time', '<=', date("H:i:s"))->get();
+            }
+            else if($getWeek == 'thu'){
+                $modalName = 'Thursday';
+                $weekPossble = Thursday::whereDate('start_time', '<=', date("H:i:s"))->get();
+            }
+            else if($getWeek == 'fri'){
+                $modalName = 'Friday';
+                $weekPossble = Friday::whereDate('start_time', '<=', date("H:i:s"))->get();
+            }
+            else if($getWeek == 'sat'){
+                $modalName = 'Saturday';
+                $weekPossble = Saturday::whereDate('start_time', '<=', date("H:i:s"))->get();
+            }
+            else if($getWeek == 'sun'){
+                $modalName = 'Sunday';
+                $weekPossble = Sunday::whereDate('start_time', '<=', date("H:i:s"))->get();
+            }   
+            
+            // dd($getWeek, $modalName, $time);
             
             $cate_id = $request->id;
-            $contents = Content::where('category_id', $cate_id)->orderBy('sequence')->get();
+            
+            dd($weekPossble, $modalName);
+            $contents = Content::where('category_id', $cate_id)->where($getWeek, '1')->orderBy('sequence')->get();
             return response()->json(['success'=>true, 'contents'=>$contents]);
         }
         catch(Exception $e){

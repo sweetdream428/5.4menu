@@ -18,6 +18,8 @@ class CreateWednesdaysTable extends Migration
             $table->string('content_id');
             $table->time('start_time')->nullable();
             $table->time('end_time')->nullable();
+            $table->string('start_second')->nullable();
+            $table->string('end_second')->nullable();
             $table->string('date_check')->nullable();
             $table->date('selectdata');
             $table->timestamps();
