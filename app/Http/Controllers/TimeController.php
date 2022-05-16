@@ -51,8 +51,8 @@ class TimeController extends Controller
             DB::table($request->weekname)->insert([
                 'start_time' => $request->start_time,
                 'end_time' => $request->end_time,
-                'start_second' => $request->start_second,
-                'end_second' => $request->end_second,
+                'start_second' => $start_second,
+                'end_second' => $end_second,
                 'date_check' => $request->date_check,
                 'selectdata' => $request->selectdata,
                 'content_id' => $request->service_id
@@ -79,8 +79,8 @@ class TimeController extends Controller
             DB::table($request->weekname)->where('id', $request->real_id)->update([
                 'start_time' => $request->start_time,
                 'end_time' => $request->end_time,
-                'start_second' => $request->start_second,
-                'end_second' => $request->end_second,
+                'start_second' => $start_second,
+                'end_second' => $end_second,
                 'date_check' => $request->date_check,
                 'selectdata' => $request->selectdata,
                 'content_id' => $request->service_id
