@@ -189,39 +189,51 @@ class MenupageController extends Controller
             $hour = date("H");
             $min = date("i");
             $seconds = $hour * 3600 + $min * 60;
-            
+            // dd($seconds);
+            $cate_id = $request->id;
+
+            $temp_contents = Content::where('category_id', $cate_id)->where($getWeek, '1')->orderBy('sequence')->get();
+            $weekids = [];
+            $contentIds = [];
+            foreach($temp_contents as $temp_content){
+                array_push($weekids, $temp_content->id);
+            }
+            // dd($weekids);
             if($getWeek == 'mon'){
                 $modalName = 'Monday';
-                $weekPossble = Monday::where('start_second', '<=', $seconds)->where('end_second', '>=', $seconds)->get();
+                $weekPossbles = Monday::where('start_second', '<=', $seconds)->where('end_second', '>=', $seconds)->get();
             }
             else if($getWeek == 'tue'){
                 $modalName = 'Tuesday';
-                $weekPossble = Tuesday::where('start_second', '<=', $seconds)->where('end_second', '=>', $seconds)->get();
+                // whereIn('content_id', $weekids)->
+                $weekPossbles = Tuesday::whereIn('content_id', $weekids)->where('start_second', '<=', $seconds)->where('end_second', '>=', $seconds)->get();
             }
             else if($getWeek == 'wed'){
                 $modalName = 'Wednesday';
-                $weekPossble = Wednesday::where('start_second', '<=', $seconds)->where('end_second', '=>', $seconds)->get();
+                $weekPossbles = Wednesday::where('start_second', '<=', $seconds)->where('end_second', '>=', $seconds)->get();
             }
             else if($getWeek == 'thu'){
                 $modalName = 'Thursday';
-                $weekPossble = Thursday::where('start_second', '<=', $seconds)->where('end_second', '=>', $seconds)->get();
+                $weekPossbles = Thursday::where('start_second', '<=', $seconds)->where('end_second', '>=', $seconds)->get();
             }
             else if($getWeek == 'fri'){
                 $modalName = 'Friday';
-                $weekPossble = Friday::where('start_second', '<=', $seconds)->where('end_second', '=>', $seconds)->get();
+                $weekPossbles = Friday::where('start_second', '<=', $seconds)->where('end_second', '>=', $seconds)->get();
             }
             else if($getWeek == 'sat'){
                 $modalName = 'Saturday';
-                $weekPossble = Saturday::where('start_second', '<=', $seconds)->where('end_second', '=>', $seconds)->get();
+                $weekPossbles = Saturday::where('start_second', '<=', $seconds)->where('end_second', '>=', $seconds)->get();
             }
             else if($getWeek == 'sun'){
                 $modalName = 'Sunday';
-                $weekPossble = Sunday::where('start_second', '<=', $seconds)->where('end_second', '=>', $seconds)->get();
+                $weekPossbles = Sunday::where('start_second', '<=', $seconds)->where('end_second', '>=', $seconds)->get();
+            }
+            foreach($weekPossbles as $weekPossble){
+                array_push($contentIds, $weekPossble->id);
             }
             
-            $cate_id = $request->id;
+            $contents = Content::whereIn('id', $contentIds)->get();
             
-            $contents = Content::where('category_id', $cate_id)->where($getWeek, '1')->orderBy('sequence')->get();
             return response()->json(['success'=>true, 'contents'=>$contents]);
         }
         catch(Exception $e){
