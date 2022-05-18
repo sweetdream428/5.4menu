@@ -172,8 +172,10 @@
             refresh();
         });
         var selCategory = '{{$firstid}}';
+
         function refresh() {
             var cate_val = $('#cate_id').val() ? $('#cate_id').val() : '{{$firstid}}';
+            console.log('cate_val', cate_val);
             var url = "{{route ('category.get')}}";
 
             $.ajax({
@@ -185,6 +187,7 @@
                 data: {id : cate_val},
                 success: function(data) {
                     if(data['success']){
+                        console.log('success data', data['contents']);
                         var contents = data['contents'];
                         var i = 0;
                         var lengths = data['contents'].length;
