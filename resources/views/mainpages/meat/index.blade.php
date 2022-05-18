@@ -167,11 +167,13 @@
             refresh();
         });
         refresh();
+
         $(document).on('change', '#cate_id', function(e){
             selCategory = $('#cate_id').val();
             refresh();
         });
         var selCategory = '{{$firstid}}';
+        console.log('selCategory', selCategory);
 
         function refresh() {
             var cate_val = $('#cate_id').val() ? $('#cate_id').val() : '{{$firstid}}';
