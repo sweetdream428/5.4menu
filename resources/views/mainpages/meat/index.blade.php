@@ -119,7 +119,12 @@
             line-height: 1.0rem !important;
         }
         
-    }   
+    }
+    select.form-control:not([multiple='multiple']){
+        background-image: url("{{asset('/assets/images/arrow-down.png')}}") !important;
+        background-position: calc(100% - 12px) 14px, calc(100% - 34px) 18px, 100% 1 !important;
+        background-size: 12px 9px, 18px 14px !important;
+    }
     
 </style>
 

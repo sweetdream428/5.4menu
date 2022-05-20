@@ -230,7 +230,7 @@ class MenupageController extends Controller
             }
             // dd($weekPossbles);
             foreach($weekPossbles as $weekPossble){
-                array_push($contentIds, $weekPossble->id);
+                array_push($contentIds, $weekPossble->content_id);
             }
             
             $contents = Content::whereIn('id', $contentIds)->get();
