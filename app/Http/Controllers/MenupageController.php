@@ -182,6 +182,28 @@ class MenupageController extends Controller
         }
     }
 
+    public function logosave($id, Request $request){
+        $imagenameget = $id.'.png';
+        
+        if ($request->file('logo_img')) {
+            $imagePath = $request->file('logo_img');
+            
+            $imagenameget = $id.'.png';
+            $imagePath->move(public_path('/assets/images/pages/'), $imagenameget);
+
+        }
+        try{
+            Page::where('id', $id)->update([
+                'logo' => '/assets/images/pages/'.$imagenameget
+            ]);
+    
+            return response()->json(['success'=>true]);
+        }
+        catch(Exception $e){
+            return response()->json(['success'=>false]);
+        }
+    }
+
     public function categet(Request $request){
         try{
             $getTime = time();

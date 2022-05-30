@@ -28,7 +28,7 @@ $(function () {
       };
       reader.readAsDataURL(files[0]);
     });
-  }
+  }  
 
   // flatpickr init
   if (flat_picker.length) {

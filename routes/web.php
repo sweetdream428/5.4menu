@@ -46,6 +46,8 @@ Route::middleware('auth')->group(function () {
     Route::get('menupage/{pagename}/{id}', [MenupageController::class, 'createpage']);
     Route::post('pagenamesave', [MenupageController::class, 'pagenamesave'])->name('pagenamesave');
     Route::post('footersave', [MenupageController::class, 'footersave'])->name('footersave');
+    Route::post('change-logo/{id}', [MenupageController::class, 'logosave'])->name('logosave');
+    
 
     Route::post('category-create', [MenupageController::class, 'categorycreate'])->name('category.create');
     Route::post('category-update', [MenupageController::class, 'categoryupdate'])->name('category.update');

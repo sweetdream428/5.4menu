@@ -164,8 +164,9 @@
     
     @include('layouts.footer')
     <script>
+        var logo = "<div style='width: 100%;text-align: center;'><div style='margin:0 auto;' class='d-flex justify-content-center'><img src='@foreach ($pages as $page){{ $page->logo }}' style='height:180px;'>@endforeach</div></div>";
 
-        var header = "<div class='mt-2' style='width: 100%;text-align: center;'><div style='margin:0 auto;' class='d-flex justify-content-center'><span><img src={{asset('/assets/images/Template/complex/left-shape.png')}} alt='left' /></span><span class='text-uppercase' style='font-weight:500;font-size: 18px;color:gray;'><select class='form-control' id='cate_id' style='background-color: #F6F5E6;'>@foreach ($categories as $category)<option value='{{$category->id}}'>{{$category->name}}</option>@endforeach</select></span><span><img src={{asset('/assets/images/Template/complex/right-shape.png')}} alt='right' /></span></div></div>";
+        var header = "<div class='mt-2' style='width: 100%;text-align: center;'><div style='margin:0 auto;' class='d-flex justify-content-center'><span><img src={{asset('/assets/images/Template/complex/left-shape.png')}} alt='left' /></span><span class='text-uppercase' style='font-weight:500;font-size: 18px;color:gray;'><select class='form-control' id='cate_id' style='background-color: #F6F5E6;'>@foreach ($categories as $category)<option value='{{$category->id}}'>{{$category->name}}   &nbsp;&nbsp;&nbsp;</option>@endforeach</select></span><span><img src={{asset('/assets/images/Template/complex/right-shape.png')}} alt='right' /></span></div></div>";
 
         var footer = `<div class='d-flex justify-content-center footer-exp text-uppercase'>@foreach ($pages as $page){{ $page->footer_text }}@endforeach</div>`;
         $(window).on('resize', function(){
@@ -219,7 +220,7 @@
         }
         function refreshPdf() {
             var foo_hei = $('.footer-exp').height();
-            var head_hei = 40;
+            var head_hei = 220;
             var j = 0;
             var children = $("#tb_main").find('tr');
             var max_height = 820;
@@ -265,8 +266,8 @@
             page_view_div.append(tbl);
             $('#main_test').append(page_view_div);
             $(page_view_div).addClass('page-view page-response');
-            
             $('.page-response').first().prepend(header);
+            $('.page-response').first().prepend(logo);
             $('.page-response').last().append(footer);
             $('#cate_id').val(selCategory);
         }

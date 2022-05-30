@@ -87,6 +87,25 @@
                     </div>
                 </div>
                 <div class="content-body">
+                    <section class="logo_img_page col-12">
+                        <!-- header media -->
+                        <form class="menupage-logo mt-2 d-flex justify-content-center">
+                            {{ csrf_field() }}
+                            <div class="media">
+                                <a href="javascript:void(0);" class="mr-25">
+                                    <img src="{{$page->logo}}" id="logo-upload-img" class="rounded mr-50" alt="logo img" height="120" width="120" />
+                                </a>
+                                <!-- upload and reset button -->
+                                <div class="media-body mt-75 ml-1 d-flex align-items-center ">
+                                    <label for="logo-upload" class="btn btn-primary mr-75">Upload</label>
+                                    <input type="file" id="logo-upload" name="logo_img" hidden accept="image/*" />
+                                    <button type="submit" class="btn btn-primary mr-75">Submit</button>
+                                </div>
+                                <!--/ upload and reset button -->
+                            </div>
+                        </form>
+                        <!--/ header media -->
+                    </section>
                     <section id="nav-tabs-aligned">
                         <div class="row match-height">
                             <!-- Centered Aligned Tabs starts -->
@@ -394,7 +413,7 @@
             $('#u-sequence').val(sequence);
             $('#edit-cate-modal').modal('show');
             $('#cate_id').val(id);
-            console.log('id------->', id);
+            
         });
 
         $('.form-cate-edit').on('submit', function(e){
@@ -604,5 +623,56 @@
             var id = $(this).attr('data-id');
             window.open('/time/'+id, '_blank');
         });
+
+        var logoUploadImg = $('#logo-upload-img'),
+        logoUploadBtn = $('#logo-upload'),
+        menupageLogo = $('.menupage-logo');
+        // Logo Add
+        if (logoUploadBtn) {
+            logoUploadBtn.on('change', function (e) {
+            var reader = new FileReader(),
+                files = e.target.files;
+            reader.onload = function () {
+                if (logoUploadImg) {
+                logoUploadImg.attr('src', reader.result);
+                }
+            };
+            reader.readAsDataURL(files[0]);
+            });
+        }
+
+        if (menupageLogo.length) {
+            menupageLogo.each(function () {
+                var $this = $(this);
+                $this.on('submit', function (e) {
+                    var isValid = $this.valid();
+                    var formData = new FormData(this);
+                    var url = '/change-logo/' + '{{$page_id}}';
+                    e.preventDefault();
+                    if(isValid){
+                        $.ajax({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            type: 'post',
+                            url: url,
+                            cache:false,
+                            data: formData,
+                            contentType: false,
+                            processData: false,
+                            success: function(data) {
+                                if(data['success']){
+                                    toastr["success"]("Changed successfully.")
+                                }
+                                else{
+                                    toastr["error"]("Error.")
+                                }
+                            }
+                        });
+                    }
+                    
+                });
+            });
+        }
     </script>
 </body>

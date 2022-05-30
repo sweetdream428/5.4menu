@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('owner');
             $table->text('footer_text')->nullable();
+            $table->string('logo')->nullable();
             $table->timestamps();
         });
     }

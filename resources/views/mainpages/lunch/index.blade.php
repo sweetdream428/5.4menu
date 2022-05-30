@@ -26,6 +26,11 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
+                                        <div style='width: 100%;text-align: center;'>
+                                            <div style='margin:0 auto;' class='d-flex justify-content-center mb-2'>
+                                                <img src='@foreach ($pages as $page){{ $page->logo }}' style='height:180px;'>@endforeach
+                                            </div>
+                                        </div>
                                         <ul class="nav nav-tabs justify-content-center" role="tablist">
                                             @foreach ($categories as $category)
                                                 <li class="nav-item">
