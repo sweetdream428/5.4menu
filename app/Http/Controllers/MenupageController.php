@@ -193,9 +193,9 @@ class MenupageController extends Controller
                 $imagePath->move(public_path('/assets/images/pages/'), $imagenameget);
 
             }
-            Page::where('id', $id)->update([
-                'logo' => '/assets/images/pages/'.$imagenameget
-            ]);
+            // Page::where('id', $id)->update([
+            //     'logo' => '/assets/images/pages/'.$imagenameget
+            // ]);
     
             return response()->json(['success'=>true]);
         }
