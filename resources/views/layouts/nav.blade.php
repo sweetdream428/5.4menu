@@ -37,7 +37,7 @@
                         <span class="user-status">Admin</span>
                     </div>
                     <span class="avatar">
-                        <img class="round" src="{{Auth::user()->user_img}}" alt="avatar" height="40" width="40">
+                        <img class="round" src="{{Auth::user()->user_img}}?<?PHP echo(time()); ?>" alt="avatar" height="40" width="40">
                         <span class="avatar-status-online"></span>
                     </span>
                 </a>

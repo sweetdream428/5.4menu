@@ -5,6 +5,9 @@
     <meta name="description" content="Menu template site">
     <meta name="keywords" content="Menu template site">
     <meta name="author" content="Dmytro">
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>@yield('title')</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600"

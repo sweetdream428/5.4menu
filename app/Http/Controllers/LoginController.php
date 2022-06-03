@@ -120,22 +120,26 @@ class LoginController extends Controller
 
     public function changeProfile($id, Request $request)
     {
-        
-        $imagenameget = $id.'.png';
-        
-        if ($request->file('user_img')) {
-            $imagePath = $request->file('user_img');
-            
-            $imagenameget = $id.'.png';
-            $imagePath->move(public_path('/assets/images/users/'), $imagenameget);
-
-        }
         try{
-            User::where('id', $id)->update([
-                'name' => $request->username,
-                'email'=> $request->useremail,
-                'user_img' => '/assets/images/users/'.$imagenameget
-            ]);
+            $imagenameget = $id.'.png';
+        
+            if ($request->file('user_img')) {
+                $imagePath = $request->file('user_img');
+                $imagenameget = $id.'.png';
+                $imagePath->move(public_path('/assets/images/users/'), $imagenameget);
+
+                User::where('id', $id)->update([
+                    'name' => $request->username,
+                    'email'=> $request->useremail,
+                    'user_img' => '/assets/images/users/'.$imagenameget
+                ]);
+            }
+            else{
+                User::where('id', $id)->update([
+                    'name' => $request->username,
+                    'email'=> $request->useremail
+                ]);
+            }
     
             return response()->json(['success'=>true]);
         }

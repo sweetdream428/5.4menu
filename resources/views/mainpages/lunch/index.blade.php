@@ -28,7 +28,7 @@
                                     <div class="card-body">
                                         <div style='width: 100%;text-align: center;'>
                                             <div style='margin:0 auto;' class='d-flex justify-content-center mb-2'>
-                                                <img src='@foreach ($pages as $page){{ $page->logo }}' style='height:180px;'>@endforeach
+                                                <img src='@foreach ($pages as $page){{ $page->logo }}?<?PHP echo(time()); ?>' style='height:180px;'>@endforeach
                                             </div>
                                         </div>
                                         <ul class="nav nav-tabs justify-content-center" role="tablist">

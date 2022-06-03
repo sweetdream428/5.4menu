@@ -71,12 +71,12 @@
                                         <div role="tabpanel" class="tab-pane active" id="account-vertical-general" aria-labelledby="account-pill-general" aria-expanded="true">
 
                                             <!-- form -->
-                                            <form class="general-form mt-2">
+                                            <form class="general-form mt-2" enctype="multipart/form-data">
                                                 {{ csrf_field() }}
                                                 <!-- header media -->
                                                 <div class="media">
                                                     <a href="javascript:void(0);" class="mr-25">
-                                                        <img src="{{Auth::user()->user_img}}" id="account-upload-img" class="rounded mr-50" alt="profile image" height="80" width="80" />
+                                                        <img src="{{Auth::user()->user_img}}?<?PHP echo(time()); ?>" id="account-upload-img" class="rounded mr-50" alt="profile image" height="80" width="80" />
                                                     </a>
                                                     <!-- upload and reset button -->
                                                     <div class="media-body mt-75 ml-1 d-flex align-items-center ">

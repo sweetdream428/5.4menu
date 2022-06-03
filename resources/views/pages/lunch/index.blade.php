@@ -89,11 +89,11 @@
                 <div class="content-body">
                     <section class="logo_img_page col-12">
                         <!-- header media -->
-                        <form class="menupage-logo mt-2 d-flex justify-content-center">
+                        <form class="menupage-logo mt-2 d-flex justify-content-center" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="media">
                                 <a href="javascript:void(0);" class="mr-25">
-                                    <img src="{{$page->logo}}" id="logo-upload-img" class="rounded mr-50" alt="logo img" height="120" width="120" />
+                                    <img src="{{$page->logo}}?<?PHP echo(time()); ?>" id="logo-upload-img" class="rounded mr-50" alt="logo img" height="120" width="120" />
                                 </a>
                                 <!-- upload and reset button -->
                                 <div class="media-body mt-75 ml-1 d-flex align-items-center ">
